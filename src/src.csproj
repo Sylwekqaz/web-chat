@@ -53,6 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\App.js" />
+    <Content Include="Scripts\bindings\enter-bindings.js" />
+    <Content Include="Scripts\KoApp.js" />
+    <Content Include="Scripts\KoApp.min.js">
+      <DependentUpon>KoApp.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Libs.js" />
     <Content Include="Scripts\Libs.min.js">
       <DependentUpon>Libs.js</DependentUpon>
@@ -67,6 +72,7 @@
     <Content Include="Scripts\libs\knockout.mapping-latest.js" />
     <Content Include="Scripts\libs\moment-with-locales.js" />
     <Content Include="Scripts\libs\moment.js" />
+    <Content Include="Scripts\VMs\ChatVM.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -203,8 +209,10 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\BuildWebCompiler.1.10.306\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildWebCompiler.1.10.306\build\BuildWebCompiler.targets'))" />
+    <Error Condition="!Exists('..\packages\BuildBundlerMinifier.1.8.147\build\BuildBundlerMinifier.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildBundlerMinifier.1.8.147\build\BuildBundlerMinifier.targets'))" />
   </Target>
   <Import Project="..\packages\BuildWebCompiler.1.10.306\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.10.306\build\BuildWebCompiler.targets')" />
+  <Import Project="..\packages\BuildBundlerMinifier.1.8.147\build\BuildBundlerMinifier.targets" Condition="Exists('..\packages\BuildBundlerMinifier.1.8.147\build\BuildBundlerMinifier.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

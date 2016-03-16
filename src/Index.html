@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Komunikator</title>
+    <link rel="stylesheet" href="Content/Site.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="chat-window" data-bind="foreach: Messeges">
+        <div data-bind="text: $data"></div>
+    </div>
+    <form data-bind="submit: sendMessage" id="chat-message">
+        <input data-bind="value: messageToAdd, valueUpdate: 'afterkeydown', enterkey:sendMessage" id="message" type="text" autocomplete="off">
+        <button type="button" data-bind="click:sendMessage">Submit</button>
+    </form>
+    <script src="Scripts/Libs.min.js"></script>
+    <script src="Scripts/KoApp.js"></script>
+    <script src="Scripts/App.js"></script>
+    <script>
+        $(function() {
+            var model = new ChatVM();
+            Chat.applyBindings(model);
+        });
+    </script>
+</body>
+</html>

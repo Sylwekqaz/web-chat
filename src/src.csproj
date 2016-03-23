@@ -72,7 +72,12 @@
     <Content Include="Scripts\libs\knockout.mapping-latest.js" />
     <Content Include="Scripts\libs\moment-with-locales.js" />
     <Content Include="Scripts\libs\moment.js" />
+    <Content Include="Scripts\VMs\MesseageVM.js" />
+    <Content Include="Scripts\VMs\ChanelVM.js" />
     <Content Include="Scripts\VMs\ChatVM.js" />
+    <Content Include="Views\new-message.html" />
+    <Content Include="Views\chanel.html" />
+    <Content Include="Views\chanel-list.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

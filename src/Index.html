@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,25 +7,46 @@
     <link rel="stylesheet" href="Content/Site.min.css">
 
     <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body>
-    <div id="chat-window" data-bind="foreach: Messeges">
-        <div data-bind="text: $data"></div>
-    </div>
-    <form data-bind="submit: sendMessage" id="chat-message">
-        <input data-bind="value: messageToAdd, valueUpdate: 'afterkeydown', enterkey:sendMessage" id="message" type="text" autocomplete="off">
-        <button type="button" data-bind="click:sendMessage">Submit</button>
-    </form>
+<aside data-bind="template:{ name: 'chanel-list-template', data: $data }">
+
+</aside>
+<main>
+    <header>Super Mega Neo Climax Ultimate <del>Boy</del> Chat</header>
+    <section id="messages-section" data-bind="template:{name: 'chanel-template', data: SelectedChanel }">
+
+    </section>
+    <section id="new-message-section" data-bind="template:{name: 'new-message-template', data: $data }">
+
+    </section>
+</main>
+
+<div class="templates">
+    <script type="text/html" id="chanel-list-template"></script>
+    <script type="text/html" id="chanel-template"></script>
+    <script type="text/html" id="new-message-template"></script>
+</div>
+<div class="scripts">
     <script src="Scripts/Libs.min.js"></script>
     <script src="Scripts/KoApp.js"></script>
     <script src="Scripts/App.js"></script>
     <script>
         $(function() {
-            var model = new ChatVM();
-            Chat.applyBindings(model);
+            $('#chanel-list-template').load('Views/chanel-list.html', function(parameters) {
+                $('#chanel-template').load('Views/chanel.html', function(parameters) {
+                    $('#new-message-template').load('Views/new-message.html', function(parameters) {
+                        var model = new ChatVM();
+                        Chat.applyBindings(model);
+                    });
+                });
+            });
+
+
         });
     </script>
+</div>
 </body>
 </html>

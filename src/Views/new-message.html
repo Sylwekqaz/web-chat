@@ -1,0 +1,4 @@
+﻿<form data-bind="submit: sendMessage" id="chat-message">
+    <input data-bind="value: messageToAdd, valueUpdate: 'afterkeydown', enterkey:sendMessage" id="message" type="text" autocomplete="off">
+    <button type="button" data-bind="click:sendMessage">Submit</button>
+</form>

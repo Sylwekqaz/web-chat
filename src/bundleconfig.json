@@ -2,8 +2,10 @@
   {
     "outputFileName": "Scripts/KoApp.js",
     "inputFiles": [
-      "Scripts/bindings/*",
-      "Scripts/VMs/*"
+      "Scripts/bindings/enter-bindings.js",
+      "Scripts/VMs/ChatVM.js",
+      "Scripts/VMs/ChanelVM.js",
+      "Scripts/VMs/MesseageVM.js"
     ]
   },
   {

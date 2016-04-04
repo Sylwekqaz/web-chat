@@ -395,3 +395,10 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# compiled css i js 
+/src/Content/*.css
+/src/Scripts/KoApp.js
+/src/Scripts/KoApp.min.js
+/src/Scripts/Libs.js
+/src/Scripts/Libs.min.js

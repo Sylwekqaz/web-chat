@@ -15,6 +15,7 @@
       "Scripts/libs/bootstrap.js",
       "Scripts/libs/knockout-3.4.0.js",
       "Scripts/libs/moment.js",
+      "Scripts/libs/MaterialForms.js",
       "Scripts/libs/moment-with-locales.js"
     ]
   }

@@ -25,27 +25,36 @@
 </main>
 
 <div class="templates">
-    <script type="text/html" id="chanel-list-template"></script>
-    <script type="text/html" id="chanel-template"></script>
-    <script type="text/html" id="new-message-template"></script>
+    <script type="text/html" id="chanel-list-template" src="Views/chanel-list.html"></script>
+    <script type="text/html" id="chanel-template" src="Views/chanel.html"></script>
+    <script type="text/html" id="new-message-template" src="Views/new-message.html"></script>
 </div>
 <div class="scripts">
     <script src="Scripts/Libs.min.js"></script>
     <script src="Scripts/KoApp.js"></script>
     <script src="Scripts/App.js"></script>
-    <script>
-        $(function() {
-            $('#chanel-list-template').load('Views/chanel-list.html', function(parameters) {
-                $('#chanel-template').load('Views/chanel.html', function(parameters) {
-                    $('#new-message-template').load('Views/new-message.html', function(parameters) {
-                        var model = new ChatVM();
-                        Chat.applyBindings(model);
+
+    <script type="text/javascript">
+        function LoadScriptInline(element) {
+            return new Promise(function(resolve, reject) {
+                var $element = jQuery(element);
+                var url = $element.attr('src');
+                $element.attr("src", "");
+                $element.load(url,
+                    function(response, status, xhr) {
+                        status === "success" ? resolve() : reject([element, url, xhr]);
                     });
-                });
             });
+        }
 
+        function InitializeKO() {
+            var model = new ChatVM();
+            Chat.applyBindings(model);
+        }
 
-        });
+        Promise.all($('script[type="text/html"][src]').map(function() { return LoadScriptInline(this); }).get())
+            .then(InitializeKO)
+            .catch(function(element) { console.error("Problem with loading template", element); });
     </script>
 </div>
 </body>

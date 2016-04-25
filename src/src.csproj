@@ -54,6 +54,8 @@
   <ItemGroup>
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\bindings\enter-bindings.js" />
+    <Content Include="Scripts\bindings\Validation\knockout.validation.js" />
+    <Content Include="Scripts\bindings\Validation\pl-PL.js" />
     <Content Include="Scripts\KoApp.js" />
     <Content Include="Scripts\KoApp.min.js">
       <DependentUpon>KoApp.js</DependentUpon>

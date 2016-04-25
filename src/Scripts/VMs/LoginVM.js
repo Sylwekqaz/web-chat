@@ -22,6 +22,17 @@
     //functions
     self.ToggleRegisterMode = function() {
         self.IsRegisteringMode(!self.IsRegisteringMode());
+
+        clearCustomErrors();
+    }
+
+    function clearCustomErrors() {
+        if (self.Username()) {
+            self.Username.notifySubscribers();
+        }
+        if (self.Password()) {
+            self.Password.notifySubscribers();
+        }
     }
 
     self.FormSubbmit = function() {
@@ -38,13 +49,11 @@
                 "password": self.Password()
             })
             .done(function() {
-                alert("Zalogowano");
+                //todo zapisywanie tokenu
                 root.PageTemplate("chat-main-template");
             })
-            .apiError(function (error) {
-                console.log(error);
+            .apiError(function(error) {
                 if (error.name === "USER_NOT_EXISTS") {
-                    console.log(error);
                     self.Username.setError("Brak użytkownika o podanym loginie");
                     self.Username.isModified(true);
                     return true;
@@ -62,6 +71,21 @@
     }
 
     self.Register = function() {
-
+        Chat.postJson("/user/register",
+            {
+                "name": self.Username(),
+                "password": self.Password()
+            })
+            .done(function() {
+                self.IsRegisteringMode(false);
+            })
+            .apiError(function(error) {
+                if (error.name === "USERNAME_IS_TAKEN") {
+                    self.Username.setError("Nazwa użytkownika jest zajęta");
+                    self.Username.isModified(true);
+                    return true;
+                }
+                return false;
+            });
     }
 }

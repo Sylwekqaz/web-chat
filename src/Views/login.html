@@ -1,28 +1,51 @@
 ﻿<div class="login-wrapper">
-    <div id="login" class="signin-card">
-        <form>
+    <div id="login" class="signin-card" data-bind="with:Login">
+        <form data-bind="submit:FormSubbmit">
             <div class="signin-head">
                 <h1>Logowanie</h1>
             </div>
-            <div class="form-group">
-                <input id="username" class="form-control" name="username" type="text" size="18" alt="login" required/>
+
+            <div class="form-group" data-bind="validationOptions: {insertMessages: false}">
+                <input class="form-control" type="text" data-bind="value:Username" required autofocus/>
                 <span class="form-bar"></span>
-                <label for="username" class="float-label">Login</label>
+                <label class="float-label">Username</label>
+                <span class="validationMessage" data-bind="validationMessage: Username"></span>
             </div>
-            <div class="form-group">
-                <input id="password" class="form-control" name="password" type="password" size="18" alt="password" required>
+
+            <div class="form-group" data-bind="if:IsRegisteringMode,validationOptions: {insertMessages: false}">
+                <input class="form-control" type="text" data-bind="value:Mail" required/>
                 <span class="form-bar"></span>
-                <label for="password" class="float-label">Hasło</label>
+                <label class="float-label">Mail</label>
+                <span class="validationMessage" data-bind="validationMessage: Mail"></span>
             </div>
-            <div class="form-group">
+
+            <div class="form-group" data-bind="validationOptions: {insertMessages: false}">
+                <input class="form-control" type="password" data-bind="value:Password" required/>
+                <span class="form-bar"></span>
+                <label class="float-label">Hasło</label>
+                <span class="validationMessage" data-bind="validationMessage: Password"></span>
+            </div>
+
+            <div class="form-group" data-bind="if:IsRegisteringMode,validationOptions: {insertMessages: false}">
+                <input class="form-control" type="password" data-bind="value:ConfirmPassword" required/>
+                <span class="form-bar"></span>
+                <label class="float-label">Potwierdź hasło</label>
+                <span class="validationMessage" data-bind="validationMessage: ConfirmPassword"></span>
+            </div>
+
+            <div class="form-group" data-bind="ifnot:IsRegisteringMode">
                 <div class="checkbox checkbox-default">
                     <input id="remember" type="checkbox" value="yes" alt="Remember me" class="">
                     <label for="remember">Zapamiętaj mnie</label>
                 </div>
             </div>
-            <div class="form-group text-center">
-                <button class="btn btn-secondary btn-lg" type="submit">Zaloguj się</button>
-                <button class="btn btn-default btn-lg" type="submit">Zarejestruj się</button>
+            <div class="form-group text-center" data-bind="ifnot:IsRegisteringMode">
+                <button class="btn btn-secondary btn-lg" type="submit">Zaloguj sie</button>
+                <button class="btn btn-default btn-lg" type="button" data-bind="click:ToggleRegisterMode">Rejestracja</button>
+            </div>
+            <div class="form-group text-center" data-bind="if:IsRegisteringMode">
+                <button class="btn btn-secondary btn-lg" type="submit">Zarejestruj się</button>
+                <button class="btn btn-default btn-lg" type="button" data-bind="click:ToggleRegisterMode">Logowanie</button>
             </div>
         </form>
     </div>

@@ -5,6 +5,7 @@
     self.Chanels = ko.observableArray([]);
     self.messageToAdd = ko.observable("");
     self.SelectedChanelName = ko.observable("");
+    self.Login = ko.observable(new LoginVM(self))
 
     self.PageTemplate = ko.observable("login-template"); // ENUM: chat-main-template, login-template, register-template
 

@@ -56,6 +56,18 @@
         return false;
     };
 
+    p.handleApiErrors = function (xhr, callbacks) {
+        if (xhr.status === 400) {
+            for (let callback of callbacks) {
+                var isHandled = callback($.parseJSON(xhr.responseText).error);
+                if (isHandled) {
+                    return true;
+                }
+            }   
+        }
+        return false;
+    };
+
     p.handleTimeout = function (textStatus) {
         if (textStatus === "timeout") {
             alert('Przekroczono czas oczekiwania. Spróbuj wykonać operację ponownie.');
@@ -65,14 +77,21 @@
         return false;
     };
 
+    p.UrlRoot = function() {
+        return "http://chatbackend-chat22.rhcloud.com:80";
+        //return "http://localhost:8080/chatbackend";
+    };
+
     p.postJson = function (url, paramsObj, successMessage, async) {
         if (typeof async === "undefined") {
             async = true;
         }
 
-        return $.ajax({
+        var apiErrorsCallbacks = [];
+
+        var request = $.ajax({
             method: "POST",
-            url: url,
+            url: p.UrlRoot() + url,
             timeout: 15000,
             contentType: "application/json; charset=utf-8",
             async: async,
@@ -80,7 +99,8 @@
         }).fail(function (xhr, textStatus) {
             var isHandled = p.handleRedirections(xhr)
                 || p.handleUnauthorized(xhr)
-                || p.handleTimeout(textStatus);
+                || p.handleTimeout(textStatus)
+                || p.handleApiErrors(xhr,apiErrorsCallbacks);
             if (!isHandled) {
                 //toastr.error("Nieoczekiwany błąd. Odśwież stronę i spróbuj ponownie."); todo
                 alert("Nieoczekiwany błąd. Odśwież stronę i spróbuj ponownie.");
@@ -91,10 +111,19 @@
                 alert(successMessage);
                 //toastr.success(successMessage); todo
             }
-        });;
+        });
+
+        request.apiError = function (callback) {
+            apiErrorsCallbacks.push(callback);
+            return this;
+        }
+
+
+        return request;
     };
 
 
+    
 
     // =========================================================================
     // DEFINE NAMESPACE

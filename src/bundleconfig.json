@@ -7,7 +7,8 @@
       "Scripts/bindings/Validation/pl-PL.js",
       "Scripts/VMs/ChatVM.js",
       "Scripts/VMs/ChanelVM.js",
-      "Scripts/VMs/MesseageVM.js"
+      "Scripts/VMs/MesseageVM.js",
+      "Scripts/VMs/LoginVM.js"
     ]
   },
   {

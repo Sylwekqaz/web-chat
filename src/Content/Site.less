@@ -8,9 +8,14 @@
 */
 
 
-@aside-width: 300px;
+@aside-width: 350px;
+@big-avatar-size: 60px;
+@small-avatar-size: 45px;
+@status-size: 15px;
+@standard-margin: 16px;
 
 body {
+    color: @primaryTextColor;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -21,7 +26,157 @@ body {
 
 aside {
     width: @aside-width;
-    background-color: palevioletred;
+    background-color: @primaryColor;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .loggeduser-avatar, .avatar {
+        position: relative;
+        float: left;
+
+        .status {
+            width: @status-size;
+            height: @status-size;
+            position: absolute;
+            top: @big-avatar-size * 0.72;
+            left: @big-avatar-size * 0.72;
+        }
+    }
+
+    .avatar {
+        .status {
+            top: @small-avatar-size * 0.72;
+            left: @small-avatar-size * 0.72 + @standard-margin;
+        }
+    }
+
+    img {
+        border-radius: 100%;
+        margin: @standard-margin;
+        margin-left: 0;
+        float: left;
+    }
+
+    .img-big {
+        width: @big-avatar-size;
+        height: @big-avatar-size;
+    }
+
+     .img-small {
+        width: @small-avatar-size;
+        height: @small-avatar-size;
+        margin-left: @standard-margin;
+     }
+
+     .imggray {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        color: @dividerColor;
+     }
+
+     .hidestatus {
+        visibility: hidden;
+    }
+
+    .hiddecommentglyph {
+        visibility: hidden;
+    }
+
+    .user-detail{
+        float:left; 
+        margin-top: @standard-margin * 2;
+        color: @textPrimaryColor;
+
+        .loggedusername {
+            font-size: @font-size-large;
+        }
+
+        .user-email {
+            font-size: @font-size-small;
+            line-height: 50%;
+        }
+    }
+
+    .top-buttons {
+        font-size: @font-size-large;
+        float: left;
+        margin-top: @standard-margin * 2.5;
+        margin-left: @standard-margin * 1.2;
+    }
+
+    .list-buttons {
+        font-family: "Glyphicons Halflings";
+        font-size: @font-size-large;
+        float: right;
+        margin-top: @standard-margin * 1.2;
+        margin-right: @standard-margin * 1.5;
+        color: @primaryTextColor;
+    }
+
+    .glyphicon-comment, .glyphicon-cog {
+        margin-right: @standard-margin;
+    }
+
+    .list {
+        padding-left: 0;
+        padding-right: 0;
+        border-top: thin solid @dividerColor;
+    }
+
+    .panel-body {
+        padding-left: @standard-margin;
+    }
+
+    .contacts-list-title {
+        border-radius: 0;
+        font-weight: bold;
+        font-size: @font-size-base;
+        line-height: 0;
+        margin-bottom: 0;
+        border-style: none;
+    }
+
+    .contacts-list, .groups-list {
+        color: @primaryTextColor;
+        background-color: @textPrimaryColor;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: @small-avatar-size;
+        width: @aside-width;
+        margin-bottom: 0;
+
+        :hover {
+            cursor: pointer;
+        }
+    }
+
+    .username {
+        margin-top: @standard-margin * 1.1;
+        float: left;
+    }
+
+    .floating-button {
+	    width: 70px;
+	    height: 70px;
+	    position: fixed;
+	    left: 250px;
+	    bottom: 40px;
+	    background: @accentColor url("Images/content_add.png") no-repeat center 50%;
+	    border-radius: 100%;
+    }
+
+    div .container {
+        background-color: @textPrimaryColor;
+        width: @aside-width;
+        padding-left: 0;
+    }
+
+    .container {
+        border-style: none;
+    }
 }
 
 main {

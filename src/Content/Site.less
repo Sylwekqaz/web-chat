@@ -27,37 +27,77 @@ body {
 aside {
     width: @aside-width;
     background-color: @textPrimaryColor;
-    max-height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 
-    a {
-        color: inherit;
-    }
-
-    .loggeduser-avatar, .avatar {
+    .avatar {
         position: relative;
-        float: left;
 
         .green-dot {
             width: @status-size;
             height: @status-size;
             position: absolute;
-            top: @big-avatar-size;
-            left: @big-avatar-size * 0.75;
+            top: 60%;
+            left: 62%;
         }
     }
 
-    .avatar {
-        z-index: 899;
-        border-top: thin solid @dividerColor;
-        border-bottom: thin solid @dividerColor;
 
-        .green-dot {
-            top: @small-avatar-size;
-            left: @small-avatar-size * 0.75 + @standard-margin;
+    .top {
+        flex-grow: 0;
+        background-color: @primaryColor;
+        z-index: 945;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+
+        .loggeduser-avatar {
+            flex-grow: 0;
+            .avatar;
+        }
+
+        .user-detail {
+            flex-grow: 1;
+            color: @textPrimaryColor;
+            align-self:flex-end;
+            margin-bottom: 7px; //hack - wyrównanie górnego tekstu z base line  //todo pomyśl jak to zrobić poprawnie
+            .loggedusername {
+                font-size: @font-size-large;
+            }
+
+            .user-email {
+                font-size: @font-size-small;
+                line-height: 50%;
+            }
+        }
+
+        .top-buttons {
+            flex-grow: 0;
+            font-size: @font-size-large;
+            margin: 5px;
+
+            :hover {
+                color: @primaryTextColor;
+                cursor: pointer;
+            }
         }
     }
+
+    .lists {
+        overflow-y: auto;
+    }
+
+
+
+
+    a {
+        color: inherit;
+    }
+
+
+
 
     .selectedcontact {
         background-color: @selectColor;
@@ -75,13 +115,13 @@ aside {
         height: @big-avatar-size;
     }
 
-     .img-small {
+    .img-small {
         width: @small-avatar-size;
         height: @small-avatar-size;
         margin-left: @standard-margin;
-     }
+    }
 
-     .imggray {
+    .imggray {
         -webkit-filter: grayscale(100%);
         filter: grayscale(100%);
         color: @dividerColor;
@@ -89,38 +129,15 @@ aside {
         .green-dot {
             visibility: hidden;
         }
-     }
+    }
 
     .hidecommentglyph {
         visibility: hidden;
     }
 
-    .user-detail{
-        float:left; 
-        margin-top: @standard-margin * 2;
-        color: @textPrimaryColor;
 
-        .loggedusername {
-            font-size: @font-size-large;
-        }
 
-        .user-email {
-            font-size: @font-size-small;
-            line-height: 50%;
-        }
-    }
 
-    .top-buttons {
-        font-size: @font-size-large;
-        margin-top: @standard-margin * 2.5;
-        margin-right: @standard-margin * 1.2;
-        float: right;
-
-        :hover {
-            color: @primaryTextColor;
-            cursor: pointer;
-        }
-    }
 
     .list-buttons, .glyphicon-comment {
         font-size: @font-size-large;
@@ -135,7 +152,7 @@ aside {
 
     .dropdown-toggle:hover {
         color: @primaryTextColor;
-     }
+    }
 
     .glyphicon {
         float: right;
@@ -145,7 +162,6 @@ aside {
         padding-left: 0;
         padding-right: 0;
         position: relative;
-        top: 45px;
     }
 
     .panel-body {
@@ -206,25 +222,14 @@ aside {
         font-size: 56px;
         position: absolute;
         left: 250px;
-	    bottom: 25px;
+        bottom: 25px;
     }
-    
+
     .green-dot {
-	    background: @greenDotColor;
-	    border-radius: 100%;
+        background: @greenDotColor;
+        border-radius: 100%;
         width: @status-size;
         height: @status-size;
-    }
-
-    .container {
-        border-style: none;
-        background-color: @primaryColor;
-        width: @aside-width;
-    }
-
-    .top {
-        position: fixed;
-        z-index: 945;
     }
 }
 

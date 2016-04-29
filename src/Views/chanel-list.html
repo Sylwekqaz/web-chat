@@ -1,56 +1,71 @@
-﻿<div class="container">
-    <div class="loggeduser-avatar">
-        <img class="img-big" data-bind="attr: { src: LoggedUser.AvatarUri }"/>
-        <img class="status" src="Content/Images/green-dot.png"/>
-    </div>
+﻿<div class="top">
+    <div class="container">
+        <div class="loggeduser-avatar">
+            <img class="img-big" data-bind="attr: { src: LoggedUser.AvatarUri }" />
+            <div class="green-dot"></div>
+        </div>
 
-    <div class="user-detail">
-        <p class="loggedusername"><strong data-bind="text: LoggedUser.name"></strong></p>
-        <p class="user-email" data-bind="text: LoggedUser.email"></p>
-    </div>
-
-    <div class="top-buttons">
-        <span class="glyphicon glyphicon-cog"></span>
-        <span class="glyphicon glyphicon-off"></span>
+        <div class="user-detail">
+            <p class="loggedusername"><strong data-bind="text: LoggedUser.name"></strong></p>
+            <p class="user-email" data-bind="text: LoggedUser.email"></p>
+        </div>
+        <a class="top-buttons" data-bind="click: $parent.clickedOff"><span class="glyphicon glyphicon-off"></span></a>
+        <a class="top-buttons" data-bind="click: $parent.clickedCog"><span class="glyphicon glyphicon-cog"></span></a>
     </div>
 </div>
 
-<div class="container list">
+<div class="list">
     <div class="panel panel-default contacts-list-title">
         <div class="panel-body list">
             Kontakty
         </div>
     </div>
     <div class="list-group contacts-list" data-bind="foreach: ContactChannels">
-        <div class="avatar list" data-bind="click: $parent.ChangeChanel">
-            <img class="img-small" data-bind="attr: { src: AvatarUri }, css: { imggray: IsOffline }" />
-            <img class="status" src="Content/Images/green-dot.png" data-bind="css: { hidestatus: IsOffline }"/>
-            <p class="username"><strong data-bind="text: Name, click: $parent.ChangeChanel, css: { imggray: IsOffline }"></strong></p>
+        <div class="avatar list" data-bind="click: $parent.ChangeChanel, css: { selectedcontact: Name() == $parent.SelectedChanelName(), imggray: IsOffline }">
+            <img class="img-small" data-bind="attr: { src: AvatarUri }" />
+            <div class="green-dot"></div>
+            <p class="username"><strong data-bind="text: Name, click: $parent.ChangeChanel"></strong></p>
             <div class="list-buttons">
-                <span class="glyphicon glyphicon-comment" data-bind="css: { imggray: IsOffline, hiddecommentglyph: AllRead }"></span>
-                <span class="glyphicon glyphicon-option-vertical" data-bind="css: { imggray: IsOffline }"></span>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a data-bind="click: $parent.clickedDropdown1">Zrób coś</a></li>
+                        <li><a data-bind="click: $parent.clickedDropdown2">Zrób coś innego</a></li>
+                    </ul>
+                </div>
             </div>
+            <span class="glyphicon glyphicon-comment" data-bind="css: { hidecommentglyph: AllRead }"></span>
         </div>
     </div>
 </div>
 
-<div class="container list">
+<div class="list">
     <div class="panel panel-default contacts-list-title">
         <div class="panel-body list">
             Grupy
         </div>
     </div>
-    <div class="list-group contacts-list" data-bind="foreach: GroupChannels">
-        <div class="avatar list" data-bind="click: $parent.ChangeChanel">
-            <img class="img-small" data-bind="attr: { src: AvatarUri }, css: { imggray: IsOffline }"/>
-            <img class="status" src="Content/Images/green-dot.png" data-bind="css: { hidestatus: IsOffline }"/>
-            <p class="username"><strong data-bind="text: Name, click: $parent.ChangeChanel, css: { imggray: IsOffline }"></strong></p>
+    <div class="list-group groups-list" data-bind="foreach: GroupChannels">
+        <div class="avatar list" data-bind="click: $parent.ChangeChanel, css: { selectedcontact: Name() == $parent.SelectedChanelName(), imggray: IsOffline }">
+            <img class="img-small" data-bind="attr: { src: AvatarUri }" />
+            <div class="green-dot"></div>
+            <p class="username"><strong data-bind="text: Name, click: $parent.ChangeChanel"></strong></p>
             <div class="list-buttons">
-                <span class="glyphicon glyphicon-comment" data-bind="css: { imggray: IsOffline, hiddecommentglyph: AllRead }"></span>
-                <span class="glyphicon glyphicon-option-vertical" data-bind="css: { imggray: IsOffline }"></span>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a data-bind="click: $parent.clickedDropdown1">Zrób coś</a></li>
+                        <li><a data-bind="click: $parent.clickedDropdown2">Zrób coś innego</a></li>
+                    </ul>
+                </div>
             </div>
+            <span class="glyphicon glyphicon-comment" data-bind="css: { hidecommentglyph: AllRead }"></span>
         </div>
     </div>
 </div>
 
-<a href="#" class="floating-button"></a>
+<a data-bind="click: $parent.clickedAdd" class="floating-button"></a>

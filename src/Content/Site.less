@@ -26,29 +26,41 @@ body {
 
 aside {
     width: @aside-width;
-    background-color: @primaryColor;
+    background-color: @textPrimaryColor;
     max-height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+
+    a {
+        color: inherit;
+    }
 
     .loggeduser-avatar, .avatar {
         position: relative;
         float: left;
 
-        .status {
+        .green-dot {
             width: @status-size;
             height: @status-size;
             position: absolute;
-            top: @big-avatar-size * 0.72;
-            left: @big-avatar-size * 0.72;
+            top: @big-avatar-size;
+            left: @big-avatar-size * 0.75;
         }
     }
 
     .avatar {
-        .status {
-            top: @small-avatar-size * 0.72;
-            left: @small-avatar-size * 0.72 + @standard-margin;
+        z-index: 899;
+        border-top: thin solid @dividerColor;
+        border-bottom: thin solid @dividerColor;
+
+        .green-dot {
+            top: @small-avatar-size;
+            left: @small-avatar-size * 0.75 + @standard-margin;
         }
+    }
+
+    .selectedcontact {
+        background-color: @selectColor;
     }
 
     img {
@@ -73,13 +85,13 @@ aside {
         -webkit-filter: grayscale(100%);
         filter: grayscale(100%);
         color: @dividerColor;
+
+        .green-dot {
+            visibility: hidden;
+        }
      }
 
-     .hidestatus {
-        visibility: hidden;
-    }
-
-    .hiddecommentglyph {
+    .hidecommentglyph {
         visibility: hidden;
     }
 
@@ -100,28 +112,40 @@ aside {
 
     .top-buttons {
         font-size: @font-size-large;
-        float: left;
         margin-top: @standard-margin * 2.5;
-        margin-left: @standard-margin * 1.2;
+        margin-right: @standard-margin * 1.2;
+        float: right;
+
+        :hover {
+            color: @primaryTextColor;
+            cursor: pointer;
+        }
     }
 
-    .list-buttons {
-        font-family: "Glyphicons Halflings";
+    .list-buttons, .glyphicon-comment {
         font-size: @font-size-large;
         float: right;
-        margin-top: @standard-margin * 1.2;
+        margin-top: @standard-margin * 1.75;
         margin-right: @standard-margin * 1.5;
-        color: @primaryTextColor;
     }
 
-    .glyphicon-comment, .glyphicon-cog {
-        margin-right: @standard-margin;
+    .dropdown {
+        display: inline;
+    }
+
+    .dropdown-toggle:hover {
+        color: @primaryTextColor;
+     }
+
+    .glyphicon {
+        float: right;
     }
 
     .list {
         padding-left: 0;
         padding-right: 0;
-        border-top: thin solid @dividerColor;
+        position: relative;
+        top: 45px;
     }
 
     .panel-body {
@@ -132,7 +156,7 @@ aside {
         border-radius: 0;
         font-weight: bold;
         font-size: @font-size-base;
-        line-height: 0;
+        line-height: @font-size-base;
         margin-bottom: 0;
         border-style: none;
     }
@@ -151,6 +175,18 @@ aside {
         :hover {
             cursor: pointer;
         }
+
+        :last-child {
+            border-top: none;
+        }
+
+        :not(:first-child) {
+            border-top: none;
+        }
+    }
+
+    .groups-list:last-child {
+        margin-bottom: 135px;
     }
 
     .username {
@@ -158,24 +194,37 @@ aside {
         float: left;
     }
 
-    .floating-button {
-	    width: 70px;
-	    height: 70px;
-	    position: fixed;
-	    left: 250px;
-	    bottom: 40px;
-	    background: @accentColor url("Images/content_add.png") no-repeat center 50%;
-	    border-radius: 100%;
+    .floating-button:hover {
+        cursor: pointer;
     }
 
-    div .container {
-        background-color: @textPrimaryColor;
-        width: @aside-width;
-        padding-left: 0;
+    .floating-button:before {
+        z-index: 899;
+        content: "\f055";
+        font-family: FontAwesome;
+        color: @accentColor;
+        font-size: 56px;
+        position: absolute;
+        left: 250px;
+	    bottom: 25px;
+    }
+    
+    .green-dot {
+	    background: @greenDotColor;
+	    border-radius: 100%;
+        width: @status-size;
+        height: @status-size;
     }
 
     .container {
         border-style: none;
+        background-color: @primaryColor;
+        width: @aside-width;
+    }
+
+    .top {
+        position: fixed;
+        z-index: 945;
     }
 }
 

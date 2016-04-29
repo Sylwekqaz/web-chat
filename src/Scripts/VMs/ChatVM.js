@@ -38,6 +38,26 @@
         self.SelectedChanelName(chanel.Name());
     }
 
+    self.clickedCog = function () {
+        alert("Kliknięte ustawienia!");
+    }
+
+    self.clickedOff = function () {
+        alert("Kliknięte wylogowywanie!");
+    }
+
+    self.clickedDropdown1 = function () {
+        alert("Zrobiłem coś!");
+    }
+
+    self.clickedDropdown2 = function () {
+        alert("Zrobiłem coś innego!");
+    }
+
+    self.clickedAdd = function() {
+        alert("Kliknięte dodawanie!");
+    }
+
 
     //test initialize data
     var chanel1 = new ChanelVM({ Name: "Kontakt 1", AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });

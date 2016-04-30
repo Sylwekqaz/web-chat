@@ -35,12 +35,18 @@ aside {
     .avatar {
         position: relative;
 
+        img {
+            width: 100%;
+            height: 100%;
+            .img-circle;
+        }
+
         .green-dot {
             width: @status-size;
             height: @status-size;
             position: absolute;
-            top: 60%;
-            left: 62%;
+            top: 72%;
+            left: 72%;
         }
     }
 
@@ -51,18 +57,20 @@ aside {
         z-index: 945;
         display: flex;
         align-items: center;
-        padding: 0 15px;
+        padding: @standard-margin;
 
-        .loggeduser-avatar {
+        .avatar {
             flex-grow: 0;
-            .avatar;
+            margin-right: @standard-margin;
+            height: @big-avatar-size;
+            width: @big-avatar-size;
         }
 
         .user-detail {
             flex-grow: 1;
             color: @textPrimaryColor;
-            align-self:flex-end;
-            margin-bottom: 7px; //hack - wyrównanie górnego tekstu z base line  //todo pomyśl jak to zrobić poprawnie
+            align-self: flex-end;
+            margin-bottom: -9px; //hack - wyrównanie górnego tekstu z base line  //todo pomyśl jak to zrobić poprawnie
             .loggedusername {
                 font-size: @font-size-large;
             }
@@ -76,7 +84,7 @@ aside {
         .top-buttons {
             flex-grow: 0;
             font-size: @font-size-large;
-            margin: 5px;
+            margin-left: @standard-margin;
 
             :hover {
                 color: @primaryTextColor;
@@ -85,9 +93,86 @@ aside {
         }
     }
 
-    .lists {
+    .chanels {
         overflow-y: auto;
+
+
+
+        .chanel-list {
+            padding-left: 0;
+            padding-right: 0;
+            position: relative;
+
+            .chanel-list-header {
+                font-weight: bold;
+                font-size: @font-size-base;
+                line-height: @font-size-base;
+                padding: @standard-margin;
+                border-bottom: 1px solid #ddd; //todo
+            }
+
+            .chanel-list-body {
+                color: @primaryTextColor;
+                background-color: @textPrimaryColor;
+                font-weight: bold;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                line-height: @small-avatar-size;
+                margin-bottom: 0;
+
+                :hover {
+                    cursor: pointer;
+                }
+
+                :last-child {
+                    border-top: none;
+                }
+
+                :not(:first-child) {
+                    border-top: none;
+                }
+
+                .chanel {
+                    display: flex;
+                    align-items: center;
+                    padding: 0 @standard-margin;
+                    border-bottom: 1px solid #ddd; //todo
+                    &.selected {
+                        background-color: @selectColor;
+                    }
+
+                    &.offline {
+                        filter: grayscale(100%);
+                        color: @dividerColor;
+
+                        .green-dot {
+                            visibility: hidden;
+                        }
+                    }
+
+                    .avatar {
+                        flex-grow: 0;
+                        height: @small-avatar-size;
+                        width: @small-avatar-size;
+                        margin-right: @standard-margin;
+                    }
+
+                    .name {
+                        flex-grow: 1;
+                        margin-top: @standard-margin * 1.1;
+                    }
+
+                    .action-button  {
+                        flex-grow: 0;
+                        font-size: @font-size-large;
+                        margin-left: @standard-margin;
+                    }
+                }
+            }
+        }
     }
+
 
 
 
@@ -99,37 +184,9 @@ aside {
 
 
 
-    .selectedcontact {
-        background-color: @selectColor;
-    }
 
-    img {
-        border-radius: 100%;
-        margin: @standard-margin;
-        margin-left: 0;
-        float: left;
-    }
 
-    .img-big {
-        width: @big-avatar-size;
-        height: @big-avatar-size;
-    }
 
-    .img-small {
-        width: @small-avatar-size;
-        height: @small-avatar-size;
-        margin-left: @standard-margin;
-    }
-
-    .imggray {
-        -webkit-filter: grayscale(100%);
-        filter: grayscale(100%);
-        color: @dividerColor;
-
-        .green-dot {
-            visibility: hidden;
-        }
-    }
 
     .hidecommentglyph {
         visibility: hidden;
@@ -137,78 +194,23 @@ aside {
 
 
 
-
-
-    .list-buttons, .glyphicon-comment {
-        font-size: @font-size-large;
-        float: right;
-        margin-top: @standard-margin * 1.75;
-        margin-right: @standard-margin * 1.5;
-    }
-
-    .dropdown {
-        display: inline;
-    }
-
     .dropdown-toggle:hover {
         color: @primaryTextColor;
     }
 
-    .glyphicon {
-        float: right;
-    }
 
-    .list {
-        padding-left: 0;
-        padding-right: 0;
-        position: relative;
-    }
 
-    .panel-body {
-        padding-left: @standard-margin;
-    }
 
-    .contacts-list-title {
-        border-radius: 0;
-        font-weight: bold;
-        font-size: @font-size-base;
-        line-height: @font-size-base;
-        margin-bottom: 0;
-        border-style: none;
-    }
 
-    .contacts-list, .groups-list {
-        color: @primaryTextColor;
-        background-color: @textPrimaryColor;
-        font-weight: bold;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        line-height: @small-avatar-size;
-        width: @aside-width;
-        margin-bottom: 0;
 
-        :hover {
-            cursor: pointer;
-        }
 
-        :last-child {
-            border-top: none;
-        }
 
-        :not(:first-child) {
-            border-top: none;
-        }
-    }
 
-    .groups-list:last-child {
+    .todo {
         margin-bottom: 135px;
     }
 
-    .username {
-        margin-top: @standard-margin * 1.1;
-        float: left;
-    }
+
 
     .floating-button:hover {
         cursor: pointer;
@@ -225,12 +227,6 @@ aside {
         bottom: 25px;
     }
 
-    .green-dot {
-        background: @greenDotColor;
-        border-radius: 100%;
-        width: @status-size;
-        height: @status-size;
-    }
 }
 
 main {

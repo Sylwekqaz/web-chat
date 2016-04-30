@@ -1,0 +1,21 @@
+﻿<div class="top">
+    <div class="avatar">
+        <img data-bind="attr: { src: LoggedUser.AvatarUri }" />
+        <div class="green-dot"></div>
+    </div>
+
+    <div class="user-detail">
+        <p class="loggedusername"><strong data-bind="text: LoggedUser.name"></strong></p>
+        <p class="user-email" data-bind="text: LoggedUser.email"></p>
+    </div>
+    <a class="top-buttons" data-bind="click: $parent.clickedCog"><span class="glyphicon glyphicon-cog"></span></a>
+    <a class="top-buttons" data-bind="click: $parent.clickedOff"><span class="glyphicon glyphicon-off"></span></a>
+</div>
+
+<div class="chanels">
+
+    <!-- ko template:{ name: 'chanel-list-template', data: {Name:'Kontakty',Chanels:ContactChannels} } --> <!--/ko-->
+    <!-- ko template:{ name: 'chanel-list-template', data: {Name:'Grupy',Chanels:GroupChannels} } --> <!--/ko-->
+
+    <a data-bind="click: $parent.clickedAdd" class="floating-button"></a>
+</div>

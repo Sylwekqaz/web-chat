@@ -1,0 +1,204 @@
+﻿aside {
+    width: @aside-width;
+    background-color: @textPrimaryColor;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .avatar {
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            .img-circle;
+        }
+
+        .green-dot {
+            width: @avatar-status-size;
+            height: @avatar-status-size;
+            position: absolute;
+            top: 72%;
+            left: 72%;
+        }
+    }
+
+
+    .top {
+        flex-grow: 0;
+        background-color: @primaryColor;
+        z-index: 945;
+        display: flex;
+        align-items: center;
+        padding: @standard-margin;
+
+        .avatar {
+            flex-grow: 0;
+            margin-right: @standard-margin;
+            height: @big-avatar-size;
+            width: @big-avatar-size;
+        }
+
+        .user-detail {
+            flex-grow: 1;
+            color: @textPrimaryColor;
+            align-self: flex-end;
+            margin-bottom: -9px; //hack - wyrównanie górnego tekstu z base line  //todo pomyśl jak to zrobić poprawnie
+            .loggedusername {
+                font-size: @font-size-large;
+            }
+
+            .user-email {
+                font-size: @font-size-small;
+                line-height: 50%;
+            }
+        }
+
+        .top-buttons {
+            flex-grow: 0;
+            font-size: @font-size-large;
+            margin-left: @standard-margin;
+
+            :hover {
+                color: @primaryTextColor;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .chanels {
+        overflow-y: auto;
+
+
+
+        .chanel-list {
+            padding-left: 0;
+            padding-right: 0;
+            position: relative;
+
+            .chanel-list-header {
+                font-weight: bold;
+                font-size: @font-size-base;
+                line-height: @font-size-base;
+                padding: @standard-margin;
+                border-bottom: 1px solid #ddd; //todo
+            }
+
+            .chanel-list-body {
+                color: @primaryTextColor;
+                background-color: @textPrimaryColor;
+                font-weight: bold;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                line-height: @small-avatar-size;
+                margin-bottom: 0;
+
+                :hover {
+                    cursor: pointer;
+                }
+
+                :last-child {
+                    border-top: none;
+                }
+
+                :not(:first-child) {
+                    border-top: none;
+                }
+
+                .chanel {
+                    display: flex;
+                    align-items: center;
+                    padding: 0 @standard-margin;
+                    border-bottom: 1px solid #ddd; //todo
+                    &.selected {
+                        background-color: @selectColor;
+                    }
+
+                    &.offline {
+                        filter: grayscale(100%);
+                        color: @dividerColor;
+
+                        .green-dot {
+                            visibility: hidden;
+                        }
+                    }
+
+                    .avatar {
+                        flex-grow: 0;
+                        height: @small-avatar-size;
+                        width: @small-avatar-size;
+                        margin-right: @standard-margin;
+                    }
+
+                    .name {
+                        flex-grow: 1;
+                        margin-top: @standard-margin * 1.1;
+                    }
+
+                    .action-button  {
+                        flex-grow: 0;
+                        font-size: @font-size-large;
+                        margin-left: @standard-margin;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+    a {
+        color: inherit;
+    }
+
+
+
+
+
+
+
+
+    .hidecommentglyph {
+        visibility: hidden;
+    }
+
+
+
+    .dropdown-toggle:hover {
+        color: @primaryTextColor;
+    }
+
+
+
+
+
+
+
+
+
+    .todo {
+        margin-bottom: 135px;
+    }
+
+
+
+    .floating-button:hover {
+        cursor: pointer;
+    }
+
+    .floating-button:before {
+        z-index: 899;
+        content: "\f055";
+        font-family: FontAwesome;
+        color: @accentColor;
+        font-size: 56px;
+        position: absolute;
+        left: 250px;
+        bottom: 25px;
+    }
+
+}

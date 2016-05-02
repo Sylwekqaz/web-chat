@@ -21,6 +21,8 @@
             position: absolute;
             top: 72%;
             left: 72%;
+            background-color: @greenDotColor;
+            .img-circle;
         }
     }
 
@@ -61,7 +63,6 @@
             margin-left: @standard-margin;
 
             :hover {
-                color: @primaryTextColor;
                 cursor: pointer;
             }
         }
@@ -69,6 +70,12 @@
 
     .chanels {
         overflow-y: auto;
+
+        &:after {
+            height: 135px; // padding for fab icon
+            content: " ";
+            display: block;
+        }
 
 
 
@@ -125,6 +132,12 @@
                         }
                     }
 
+                    &.unread {
+                        .unread-icon {
+                            visibility: visible;
+                        }
+                    }
+
                     .avatar {
                         flex-grow: 0;
                         height: @small-avatar-size;
@@ -137,27 +150,47 @@
                         margin-top: @standard-margin * 1.1;
                     }
 
-                    .action-button  {
+                    .action-button {
                         flex-grow: 0;
                         font-size: @font-size-large;
                         margin-left: @standard-margin;
                     }
+
+                    .unread-icon {
+                        visibility: hidden;
+                    }
                 }
             }
         }
+
+        .floating-button {
+
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.38);
+                background-color: darken(@accentColor,5%);
+            }
+
+            z-index: 899;
+            background-color: @accentColor;
+            color: white;
+            position: absolute;
+            left: 250px;
+            bottom: 25px;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            line-height: 55px; // must be equal to height to vertical align
+            text-align: center;
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+            -moz-transition: all 0.15s ease-out 0s;
+            -o-transition: all 0.15s ease-out 0s;
+            -webkit-transition: all 0.15s ease-out 0s;
+            transition: all 0.15s ease-out 0s;
+        }
     }
-
-
-
-
-
-    a {
-        color: inherit;
-    }
-
-
-
-
 
 
 
@@ -165,40 +198,4 @@
     .hidecommentglyph {
         visibility: hidden;
     }
-
-
-
-    .dropdown-toggle:hover {
-        color: @primaryTextColor;
-    }
-
-
-
-
-
-
-
-
-
-    .todo {
-        margin-bottom: 135px;
-    }
-
-
-
-    .floating-button:hover {
-        cursor: pointer;
-    }
-
-    .floating-button:before {
-        z-index: 899;
-        content: "\f055";
-        font-family: FontAwesome;
-        color: @accentColor;
-        font-size: 56px;
-        position: absolute;
-        left: 250px;
-        bottom: 25px;
-    }
-
 }

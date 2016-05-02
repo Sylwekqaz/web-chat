@@ -3,15 +3,15 @@
         <div class="chanel-list-header" data-bind="text:Name"></div>
 
         <div class="chanel-list-body" data-bind="foreach: Chanels">
-            <div class="chanel" data-bind="click: $root.ChangeChanel, css: { selected: Name() == $root.SelectedChanelName(), offline: IsOffline }">
+            <div class="chanel" data-bind="click: $root.ChangeChanel, css: { selected: Name() == $root.SelectedChanelName(), offline: IsOffline, unread:!AllRead() }">
                 <div class="avatar">
-                    <img data-bind="attr: { src: AvatarUri }"/>
+                    <img data-bind="attr: { src: AvatarUri }" />
                     <div class="green-dot"></div>
                 </div>
                 <p class="name">
                     <strong data-bind="text: Name, click: $root.ChangeChanel"></strong>
                 </p>
-                <span class="action-button glyphicon glyphicon-comment" data-bind="css: { hidecommentglyph: AllRead }"></span> <!--todo move me-->
+                <span class="action-button unread-icon glyphicon glyphicon-comment"></span> <!--todo move me-->
                 <div class="action-button">
                     <div class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

@@ -48,9 +48,8 @@
                 "name": self.Username(),
                 "password": self.Password()
             })
-            .done(function() {
-                //todo zapisywanie tokenu
-                root.PageTemplate("chat-main-template");
+            .done(function(response) {
+                root.CurrentUser().SetAuthToken(response.token);
             })
             .apiError(function(error) {
                 if (error.name === "USER_NOT_EXISTS") {

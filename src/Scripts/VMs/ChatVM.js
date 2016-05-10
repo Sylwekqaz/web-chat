@@ -5,18 +5,27 @@
     self.Chanels = ko.observableArray([]);
     self.messageToAdd = ko.observable("");
     self.SelectedChanelName = ko.observable("");
-    self.Login = ko.observable(new LoginVM(self))
 
-    self.PageTemplate = ko.observable("login-template"); // ENUM: chat-main-template, login-template, register-template
+    self.CurrentUser = ko.observable(new CurrentUserVM());
+    self.Login = ko.observable(new LoginVM(self));
 
     //computed
     self.SelectedChanel = ko.computed(function() {
-        var selectedChanel = ko.utils.arrayFirst(self.Chanels(), function(chanel) {
-            return chanel.Name() === self.SelectedChanelName();
-        });
+        var selectedChanel = ko.utils.arrayFirst(self.Chanels(),
+            function(chanel) {
+                return chanel.Name() === self.SelectedChanelName();
+            });
 
         return selectedChanel;
     });
+
+    self.PageTemplate = ko.pureComputed(function() {
+        if (!self.CurrentUser().IsLogged()) {
+            return "login-template";
+        }
+        return "chat-main-template";
+    }); // ENUM: chat-main-template, login-template
+
 
     //functions
     self.sendMessage = function() {
@@ -27,7 +36,7 @@
         }
     }
 
-    self.ChangeChanel = function (chanel) {
+    self.ChangeChanel = function(chanel) {
         self.SelectedChanelName(chanel.Name());
     }
 

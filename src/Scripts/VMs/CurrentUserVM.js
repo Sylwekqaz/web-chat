@@ -24,15 +24,27 @@
         window.localStorage.AuthToken = token;
     }
 
-    self.EnableHandlingUnauthorized = function() {
-        Chat.setUnauthorizedCallback(function(xhr) {
-            self.IsLogged(false);
-            self.Id("");
-            self.Name("");
 
-            //todo clear other shit when detect user was logged out
+    self.Logout = function () {
+        Chat.getJson("/user/logout")
+            .done(function (response) {
+                self.Clear();
+            });
+    }
+
+    self.EnableHandlingUnauthorized = function () {
+        Chat.setUnauthorizedCallback(function(xhr) {
+            self.Clear();
             return true;
         });
+    }
+
+    self.Clear = function () {
+        self.IsLogged(false);
+        self.Id("");
+        self.Name("");
+        self.SaveToken("");
+        //todo clear other shit when detect user was logged out
     }
 
     /* self.EnableSyncToken = function() {
@@ -51,6 +63,8 @@
                 self.Id(response.id);
             });
     }
+
+    
 
     //ctor
     self.EnableHandlingUnauthorized();

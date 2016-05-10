@@ -66,6 +66,8 @@
     <Content Include="bundleconfig.json" />
     <Content Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults" />
+    <Content Include="Content\aside.less" />
+    <Content Include="Content\variables.less" />
     <None Include="Scripts\libs\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\libs\jquery-1.9.1.js" />
     <Content Include="Scripts\libs\knockout-3.4.0.js" />
@@ -75,6 +77,7 @@
     <Content Include="Scripts\VMs\MesseageVM.js" />
     <Content Include="Scripts\VMs\ChanelVM.js" />
     <Content Include="Scripts\VMs\ChatVM.js" />
+    <Content Include="Views\aside.html" />
     <Content Include="Views\new-message.html" />
     <Content Include="Views\chanel.html" />
     <Content Include="Views\chanel-list.html" />

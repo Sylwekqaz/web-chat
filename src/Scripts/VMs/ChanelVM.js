@@ -3,6 +3,9 @@
 
     self.Messeges = ko.observableArray();
     self.Name = ko.observable(data.Name);
+    self.AvatarUri = ko.observable(data.AvatarUri);
+    self.IsOffline = ko.observable(data.IsOffline);
+    self.AllRead = ko.observable(data.AllRead);
 
     //test initialize data
     self.Messeges.push(new MesseageVM({ Content: data.Name }));

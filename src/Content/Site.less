@@ -1,5 +1,7 @@
 ﻿@import "bootstrap/bootstrap.less";
 @import "fontawesome/font-awesome.less";
+@import "variables.less";
+@import "aside.less";
 
 /* 
     bootstrap/variables.less
@@ -8,9 +10,9 @@
 */
 
 
-@aside-width: 300px;
 
 body {
+    color: @primaryTextColor;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -19,10 +21,7 @@ body {
     flex-direction: row;
 }
 
-aside {
-    width: @aside-width;
-    background-color: palevioletred;
-}
+
 
 main {
     display: flex;

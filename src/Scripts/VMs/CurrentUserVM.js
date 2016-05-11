@@ -6,6 +6,8 @@
 
     self.Id = ko.observable();
     self.Name = ko.observable();
+    self.AvatarUri = ko.observable("");
+    self.Email = ko.observable("");
 
 
     //functions
@@ -43,7 +45,10 @@
         self.IsLogged(false);
         self.Id("");
         self.Name("");
+        self.Email("");
+        self.AvatarUri("");
         self.SaveToken("");
+
         //todo clear other shit when detect user was logged out
     }
 
@@ -59,8 +64,10 @@
         Chat.getJson("/user/whoami")
             .done(function(response) {
                 self.IsLogged(true);
-                self.Name(response.name);
                 self.Id(response.id);
+                self.Name(response.name);
+                self.Email(response.email);
+                self.AvatarUri("Content/Images/sample.jpg"); //todo
             });
     }
 

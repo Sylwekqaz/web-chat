@@ -1,15 +1,15 @@
 ﻿<div class="top">
     <div class="avatar">
-        <img data-bind="attr: { src: LoggedUser.AvatarUri }" />
+        <img data-bind="attr: { src: CurrentUser().AvatarUri }" />
         <div class="green-dot"></div>
     </div>
 
     <div class="user-detail">
-        <p class="loggedusername"><strong data-bind="text: LoggedUser.name"></strong></p>
-        <p class="user-email" data-bind="text: LoggedUser.email"></p>
+        <p class="loggedusername"><strong data-bind="text: CurrentUser().Name"></strong></p>
+        <p class="user-email" data-bind="text: CurrentUser().Email"></p>
     </div>
-    <a class="top-buttons" data-bind="click: $parent.clickedCog"><span class="glyphicon glyphicon-cog"></span></a>
-    <a class="top-buttons" data-bind="click: $parent.clickedOff"><span class="glyphicon glyphicon-off"></span></a>
+    <a class="top-buttons" data-bind="click: $root.clickedCog"><span class="glyphicon glyphicon-cog"></span></a>
+    <a class="top-buttons" data-bind="click: CurrentUser().Logout"><span class="glyphicon glyphicon-off"></span></a>
 </div>
 
 <div class="chanels">
@@ -17,7 +17,7 @@
     <!-- ko template:{ name: 'chanel-list-template', data: {Name:'Kontakty',Chanels:ContactChannels} } --> <!--/ko-->
     <!-- ko template:{ name: 'chanel-list-template', data: {Name:'Grupy',Chanels:GroupChannels} } --> <!--/ko-->
 
-    <a data-bind="click: $parent.clickedAdd" class="floating-button">
+    <a data-bind="click: $root.clickedAdd" class="floating-button">
         <i class="glyphicon glyphicon-plus"></i>
     </a>
 </div>

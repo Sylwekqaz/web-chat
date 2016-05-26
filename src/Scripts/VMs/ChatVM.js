@@ -6,24 +6,31 @@
     self.GroupChannels = ko.observableArray([]);
     self.messageToAdd = ko.observable("");
     self.SelectedChanelName = ko.observable("");
-    self.LoggedUser = {
-        AvatarUri: ko.observable(""),
-        name: ko.observable(""),
-        email: ko.observable("")
-    };
+    self.CurrentUser = ko.observable(new CurrentUserVM());
+    self.Login = ko.observable(new LoginVM(self));
 
     //computed
-    self.SelectedChanel = ko.computed(function () {
-        var selectedChanel = ko.utils.arrayFirst(self.ContactChannels(), function (chanel) {
-            return chanel.Name() === self.SelectedChanelName();
-        });
-        if (!selectedChanel) {
-            selectedChanel = ko.utils.arrayFirst(self.GroupChannels(), function (chanel) {
+    self.SelectedChanel = ko.computed(function() {
+        var selectedChanel = ko.utils.arrayFirst(self.ContactChannels(),
+            function(chanel) {
                 return chanel.Name() === self.SelectedChanelName();
             });
+        if (!selectedChanel) {
+            selectedChanel = ko.utils.arrayFirst(self.GroupChannels(),
+                function(chanel) {
+                    return chanel.Name() === self.SelectedChanelName();
+                });
         }
         return selectedChanel;
     });
+
+    self.PageTemplate = ko.pureComputed(function() {
+        if (!self.CurrentUser().IsLogged()) {
+            return "login-template";
+        }
+        return "chat-main-template";
+    }); // ENUM: chat-main-template, login-template
+
 
     //functions
     self.sendMessage = function () {
@@ -34,7 +41,7 @@
         }
     }
 
-    self.ChangeChanel = function (chanel) {
+    self.ChangeChanel = function(chanel) {
         self.SelectedChanelName(chanel.Name());
     }
 
@@ -83,8 +90,4 @@
     self.GroupChannels.push(chanel10);
 
     self.SelectedChanelName("Kontakt 1");
-
-    self.LoggedUser.AvatarUri = "Content/Images/sample.jpg";
-    self.LoggedUser.name = "Kotek Przykladowy";
-    self.LoggedUser.email = "kotek@plotek.pl";
 }

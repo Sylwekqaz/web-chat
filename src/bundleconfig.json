@@ -3,9 +3,13 @@
     "outputFileName": "Scripts/KoApp.js",
     "inputFiles": [
       "Scripts/bindings/enter-bindings.js",
+      "Scripts/bindings/Validation/knockout.validation.js",
+      "Scripts/bindings/Validation/pl-PL.js",
       "Scripts/VMs/ChatVM.js",
       "Scripts/VMs/ChanelVM.js",
-      "Scripts/VMs/MesseageVM.js"
+      "Scripts/VMs/MesseageVM.js",
+      "Scripts/VMs/LoginVM.js",
+      "Scripts/VMs/CurrentUserVM.js"
     ]
   },
   {
@@ -15,6 +19,7 @@
       "Scripts/libs/bootstrap.js",
       "Scripts/libs/knockout-3.4.0.js",
       "Scripts/libs/moment.js",
+      "Scripts/libs/MaterialForms.js",
       "Scripts/libs/moment-with-locales.js"
     ]
   }

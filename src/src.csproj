@@ -54,6 +54,8 @@
   <ItemGroup>
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\bindings\enter-bindings.js" />
+    <Content Include="Scripts\bindings\Validation\knockout.validation.js" />
+    <Content Include="Scripts\bindings\Validation\pl-PL.js" />
     <Content Include="Scripts\KoApp.js" />
     <Content Include="Scripts\KoApp.min.js">
       <DependentUpon>KoApp.js</DependentUpon>
@@ -68,16 +70,23 @@
     <Content Include="compilerconfig.json.defaults" />
     <Content Include="Content\aside.less" />
     <Content Include="Content\variables.less" />
+    <Content Include="Content\Login.less" />
+    <Content Include="Content\MaterialForms.less" />
     <None Include="Scripts\libs\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\libs\jquery-1.9.1.js" />
     <Content Include="Scripts\libs\knockout-3.4.0.js" />
     <Content Include="Scripts\libs\knockout.mapping-latest.js" />
+    <Content Include="Scripts\libs\MaterialForms.js" />
     <Content Include="Scripts\libs\moment-with-locales.js" />
     <Content Include="Scripts\libs\moment.js" />
+    <Content Include="Scripts\VMs\CurrentUserVM.js" />
+    <Content Include="Scripts\VMs\LoginVM.js" />
     <Content Include="Scripts\VMs\MesseageVM.js" />
     <Content Include="Scripts\VMs\ChanelVM.js" />
     <Content Include="Scripts\VMs\ChatVM.js" />
     <Content Include="Views\aside.html" />
+    <Content Include="Views\chat-main-view.html" />
+    <Content Include="Views\login.html" />
     <Content Include="Views\new-message.html" />
     <Content Include="Views\chanel.html" />
     <Content Include="Views\chanel-list.html" />

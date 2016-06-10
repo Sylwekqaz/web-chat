@@ -29,6 +29,7 @@
 
     .top {
         flex-grow: 0;
+        flex-shrink: 0;
         background-color: @primaryColor;
         z-index: 945;
         display: flex;
@@ -37,6 +38,7 @@
 
         .avatar {
             flex-grow: 0;
+            flex-shrink: 0;
             margin-right: @standard-margin;
             height: @big-avatar-size;
             width: @big-avatar-size;
@@ -44,6 +46,8 @@
 
         .user-detail {
             flex-grow: 1;
+            overflow:hidden;
+            white-space: nowrap;
             color: @textPrimaryColor;
             align-self: flex-end;
             margin-bottom: -9px; //hack - wyrównanie górnego tekstu z base line  //todo pomyśl jak to zrobić poprawnie
@@ -59,6 +63,7 @@
 
         .top-buttons {
             flex-grow: 0;
+            flex-shrink: 0;
             font-size: @font-size-large;
 
             :hover {
@@ -148,6 +153,7 @@
 
                     .avatar {
                         flex-grow: 0;
+                        flex-shrink: 0;
                         height: @small-avatar-size;
                         width: @small-avatar-size;
                         margin-right: @standard-margin;
@@ -155,11 +161,14 @@
 
                     .name {
                         flex-grow: 1;
+                        overflow:hidden;
+                        white-space: nowrap;
                         margin-top: @standard-margin * 1.1;
                     }
 
                     .action-button {
                         flex-grow: 0;
+                        flex-shrink: 0;
                         font-size: @font-size-large;
                         margin-left: @standard-margin;
 

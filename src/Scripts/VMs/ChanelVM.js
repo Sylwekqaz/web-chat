@@ -7,6 +7,8 @@
     self.IsOffline = ko.observable(data.IsOffline);
     self.AllRead = ko.observable(data.AllRead);
 
+    self.ConversationId = ko.observable(data.ConversationId);
+
     //test initialize data
     self.Messeges.push(new MesseageVM({ Content: data.Name }));
 }

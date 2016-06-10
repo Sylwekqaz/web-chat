@@ -33,16 +33,58 @@
 
 
     //functions
-    self.sendMessage = function () {
+
+    self.FetchFriends = function () {
+        Chat.getJson("/friends/my")
+            .done(function (data) {
+                for (i in data) {
+                    var chanel = new ChanelVM({ Name: data[i].name, AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });
+                    self.ContactChannels.push(chanel);
+                }
+            });
+    }
+
+    self.FetchGroups = function () {
+        Chat.getJson("/groups/my")
+            .done(function (data) {
+                for (i in data) {
+                    var chanel = new ChanelVM({ ConversationId: data[i].id, Name: data[i].name, AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });
+                    self.GroupChannels.push(chanel);
+                }
+
+            });
+    }
+
+    self.FetchLast20Messages = function () {
+        Chat.getJson("/messages/last", { "id": self.SelectedChanel().ConversationId() })
+        .done(function (data) {
+            for (i in data) {
+                var message = new MesseageVM({Content: data[i].message });
+                self.SelectedChanel().Messeges().push(message);
+            }
+        });
+    }
+
+    self.Send = function () {
         if (self.messageToAdd() != "") {
-            var message = new MesseageVM({ Content: self.messageToAdd() });
-            self.SelectedChanel().Messeges.push(message);
-            self.messageToAdd("");
+            Chat.postJson("/messages/send", {
+                "conversationId": self.SelectedChanel().ConversationId(),
+                "message": self.messageToAdd()
+            })
+            .done(function () {
+                self.messageToAdd("");
+            }); 
         }
+    }
+
+    self.sendMessage = function () {
+        self.Send();
+        self.FetchLast20Messages();
     }
 
     self.ChangeChanel = function(chanel) {
         self.SelectedChanelName(chanel.Name());
+        self.FetchLast20Messages();
     }
 
     self.clickedCog = function () {
@@ -65,29 +107,13 @@
         alert("Kliknięte dodawanie!");
     }
 
+    self.FetchFriends();
+    self.FetchGroups();
 
     //test initialize data
     var chanel1 = new ChanelVM({ Name: "Kontakt 1", AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });
-    var chanel2 = new ChanelVM({ Name: "Kontakt 2", AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: true });
-    var chanel3 = new ChanelVM({ Name: "Kontakt 3", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: false });
-    var chanel4 = new ChanelVM({ Name: "Kontakt 4", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
-    var chanel5 = new ChanelVM({ Name: "Kontakt 5", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
     self.ContactChannels.push(chanel1);
-    self.ContactChannels.push(chanel2);
-    self.ContactChannels.push(chanel3);
-    self.ContactChannels.push(chanel4);
-    self.ContactChannels.push(chanel5);
 
-    var chanel6 = new ChanelVM({ Name: "Grupa 1", AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });
-    var chanel7 = new ChanelVM({ Name: "Grupa 2", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: false });
-    var chanel8 = new ChanelVM({ Name: "Grupa 3", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
-    var chanel9 = new ChanelVM({ Name: "Grupa 4", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
-    var chanel10 = new ChanelVM({ Name: "Grupa 5", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
-    self.GroupChannels.push(chanel6);
-    self.GroupChannels.push(chanel7);
-    self.GroupChannels.push(chanel8);
-    self.GroupChannels.push(chanel9);
-    self.GroupChannels.push(chanel10);
-
-    self.SelectedChanelName("Kontakt 1");
+    var s = self.ContactChannels()[0].Name();
+    self.SelectedChanelName(s);
 }

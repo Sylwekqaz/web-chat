@@ -1,3 +1,11 @@
-﻿<!-- ko foreach:Messeges-->
-<div data-bind="text: Content"></div>
-<!-- /ko -->
+﻿<div class="message-group own">
+    <!-- ko foreach:Messeges-->
+    <div class="message-outer">
+        <div class="avatar-section">
+            <img class="img-circle" src="Content/Images/sample.jpg" />
+        </div>
+        <div class="message-inner">
+            <div class="message" data-bind="text: Content"></div>
+        </div>
+    </div>
+    <!-- /ko -->

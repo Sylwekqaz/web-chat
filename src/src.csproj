@@ -74,6 +74,7 @@
     <Content Include="Content\Material\Forms.less" />
     <Content Include="Content\Material\Fab.less" />
     <Content Include="Content\Material\Material.less" />
+    <Content Include="Content\messages.less" />
     <None Include="Scripts\libs\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\libs\jquery-1.9.1.js" />
     <Content Include="Scripts\libs\knockout-3.4.0.js" />

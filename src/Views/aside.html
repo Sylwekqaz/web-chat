@@ -17,7 +17,24 @@
     <!-- ko template:{ name: 'chanel-list-template', data: {Name:'Kontakty',Chanels:ContactChannels} } --> <!--/ko-->
     <!-- ko template:{ name: 'chanel-list-template', data: {Name:'Grupy',Chanels:GroupChannels} } --> <!--/ko-->
 
-    <a data-bind="click: $root.clickedAdd" class="floating-button">
-        <i class="glyphicon glyphicon-plus"></i>
-    </a>
+
+    <div class="fab-menu">
+        <ul>
+            <li>
+                <a data-bind="click: $root.clickedAdd" class="fab fab-sm fab-success">
+                    <i class="fa fa-user-plus"></i>
+                </a>
+            </li>
+            <li>
+                <a data-bind="click: $root.clickedAdd" class="fab fab-sm fab-info">
+                    <i class="fa fa-users"></i>
+                </a>
+            </li>
+        </ul>
+        <a data-bind="click: $root.clickedAdd" class="fab fab-secondary">
+            <i class="fa fa-plus"></i>
+        </a>
+    </div>
+
+
 </div>

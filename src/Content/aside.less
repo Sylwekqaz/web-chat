@@ -189,32 +189,10 @@
             }
         }
 
-        .floating-button {
-
-            &:hover {
-                cursor: pointer;
-                box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.38);
-                background-color: darken(@accentColor,5%);
-            }
-
-            z-index: 899;
-            background-color: @accentColor;
-            color: white;
+        .fab-menu {
             position: absolute;
             left: @aside-width - 50px - 55px;
             bottom: 25px;
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            line-height: 55px; // must be equal to height to vertical align
-            text-align: center;
-            text-decoration: none;
-            font-size: 24px;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
-            -moz-transition: all 0.15s ease-out 0s;
-            -o-transition: all 0.15s ease-out 0s;
-            -webkit-transition: all 0.15s ease-out 0s;
-            transition: all 0.15s ease-out 0s;
         }
     }
 }

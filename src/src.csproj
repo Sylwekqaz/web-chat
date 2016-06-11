@@ -82,6 +82,8 @@
     <Content Include="Scripts\libs\MaterialForms.js" />
     <Content Include="Scripts\libs\moment-with-locales.js" />
     <Content Include="Scripts\libs\moment.js" />
+    <Content Include="Scripts\VMs\GroupVM.js" />
+    <Content Include="Scripts\VMs\FriendVM.js" />
     <Content Include="Scripts\VMs\CurrentUserVM.js" />
     <Content Include="Scripts\VMs\LoginVM.js" />
     <Content Include="Scripts\VMs\MesseageVM.js" />

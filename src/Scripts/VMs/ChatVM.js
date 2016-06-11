@@ -2,27 +2,28 @@
     var self = this;
 
     //observables
-    self.ContactChannels = ko.observableArray([]);
-    self.GroupChannels = ko.observableArray([]);
+    self.Friends = ko.observableArray([]);
+    self.Groups = ko.observableArray([]);
+    self.SelectedChanelId = ko.observable("");
+
     self.messageToAdd = ko.observable("");
-    self.SelectedChanelName = ko.observable("");
     self.CurrentUser = ko.observable(new CurrentUserVM());
     self.Login = ko.observable(new LoginVM(self));
 
     //computed
     self.SelectedChanel = ko.computed(function() {
-        var selectedChanel = ko.utils.arrayFirst(self.ContactChannels(),
+        var selectedChanel = ko.utils.arrayFirst(self.Friends(),
             function(chanel) {
-                return chanel.Name() === self.SelectedChanelName();
+                return chanel.Id() === self.SelectedChanelId();
             });
         if (!selectedChanel) {
-            selectedChanel = ko.utils.arrayFirst(self.GroupChannels(),
+            selectedChanel = ko.utils.arrayFirst(self.Groups(),
                 function(chanel) {
-                    return chanel.Name() === self.SelectedChanelName();
+                    return chanel.Id() === self.SelectedChanelId();
                 });
         }
         return selectedChanel;
-    });
+    }); 
 
     self.PageTemplate = ko.pureComputed(function() {
         if (!self.CurrentUser().IsLogged()) {
@@ -37,9 +38,10 @@
     self.FetchFriends = function () {
         Chat.getJson("/friends/my")
             .done(function (data) {
-                for (i in data) {
-                    var chanel = new ChanelVM({ Name: data[i].name, AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });
-                    self.ContactChannels.push(chanel);
+                self.Friends.removeAll();
+                for (i of data) {
+                    var chanel = new FriendVM(i);
+                    self.Friends.push(chanel);
                 }
             });
     }
@@ -47,35 +49,35 @@
     self.FetchGroups = function () {
         Chat.getJson("/groups/my")
             .done(function (data) {
-                for (i in data) {
-                    var chanel = new ChanelVM({ ConversationId: data[i].id, Name: data[i].name, AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });
-                    self.GroupChannels.push(chanel);
+                self.Groups.removeAll();
+                for (i of data) {
+                    var chanel = new FriendVM(i);
+                    self.Groups.push(chanel);
                 }
-
             });
     }
 
-    self.FetchLast20Messages = function () {
-        Chat.getJson("/messages/last", { "id": self.SelectedChanel().ConversationId() })
-        .done(function (data) {
-            for (i in data) {
-                var message = new MesseageVM({Content: data[i].message });
-                self.SelectedChanel().Messeges().push(message);
-            }
-        });
-    }
+//    self.FetchLast20Messages = function () {
+//        Chat.getJson("/messages/last", { "id": self.SelectedChanel().ConversationId() })
+//        .done(function (data) {
+//            for (i in data) {
+//                var message = new MesseageVM({Content: data[i].message });
+//                self.SelectedChanel().Messeges().push(message);
+//            }
+//        });
+//    }
 
-    self.Send = function () {
-        if (self.messageToAdd() != "") {
-            Chat.postJson("/messages/send", {
-                "conversationId": self.SelectedChanel().ConversationId(),
-                "message": self.messageToAdd()
-            })
-            .done(function () {
-                self.messageToAdd("");
-            }); 
-        }
-    }
+//    self.Send = function () {
+//        if (self.messageToAdd() != "") {
+//            Chat.postJson("/messages/send", {
+//                "conversationId": self.SelectedChanel().ConversationId(),
+//                "message": self.messageToAdd()
+//            })
+//            .done(function () {
+//                self.messageToAdd("");
+//            }); 
+//        }
+//    }
 
     self.sendMessage = function () {
         self.Send();
@@ -83,16 +85,17 @@
     }
 
     self.ChangeChanel = function(chanel) {
-        self.SelectedChanelName(chanel.Name());
-        self.FetchLast20Messages();
+        self.SelectedChanelId(chanel.Id());
     }
 
+    self.InitializeChat = function() {
+        self.FetchFriends();
+        self.FetchGroups();
+    }
+
+    //dummy actions for not implemented actions
     self.clickedCog = function () {
         alert("Kliknięte ustawienia!");
-    }
-
-    self.clickedOff = function () {
-        alert("Kliknięte wylogowywanie!");
     }
 
     self.clickedDropdown1 = function () {
@@ -107,13 +110,11 @@
         alert("Kliknięte dodawanie!");
     }
 
-    self.FetchFriends();
-    self.FetchGroups();
-
-    //test initialize data
-    var chanel1 = new ChanelVM({ Name: "Kontakt 1", AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });
-    self.ContactChannels.push(chanel1);
-
-    var s = self.ContactChannels()[0].Name();
-    self.SelectedChanelName(s);
+    //ctor
+    self.CurrentUser()
+        .IsLogged.subscribe(function(newValue) {
+            if (newValue) {
+                self.InitializeChat();
+            }
+        });
 }

@@ -3,7 +3,7 @@
     <div class="chanel-list-header" data-bind="text:Name"></div>
 
     <div class="chanel-list-body" data-bind="foreach: Chanels">
-        <div class="chanel" data-bind="click: $root.ChangeChanel, css: { selected: Name() == $root.SelectedChanelName(), offline: IsOffline, unread:!AllRead() }">
+        <div class="chanel" data-bind="click: $root.ChangeChanel, css: { selected: Id() == $root.SelectedChanelId(), offline: IsOffline, unread:!AllRead() }">
             <div class="avatar">
                 <img data-bind="attr: { src: AvatarUri }" />
                 <div class="green-dot"></div>

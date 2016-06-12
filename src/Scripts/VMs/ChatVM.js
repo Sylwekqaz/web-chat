@@ -44,7 +44,7 @@
             .done(function(data) {
                 self.Friends.removeAll();
                 for (i of data) {
-                    var chanel = new FriendVM(i);
+                    var chanel = new FriendVM(self, i);
                     self.Friends.push(chanel);
                 }
             });
@@ -55,7 +55,7 @@
             .done(function(data) {
                 self.Groups.removeAll();
                 for (i of data) {
-                    var chanel = new FriendVM(i);
+                    var chanel = new GroupVM(self, i);
                     self.Groups.push(chanel);
                 }
             });

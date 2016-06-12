@@ -1,4 +1,4 @@
-﻿function MesseageVM(data) {
+﻿function MesseageVM(root, chanel, data) {
     var self = this;
 
     self.Id = ko.observable(data.id);

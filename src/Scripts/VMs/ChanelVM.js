@@ -1,4 +1,4 @@
-﻿function ChanelVM(data) {
+﻿function ChanelVM(root, data) {
     var self = this;
 
     self.Id = ko.observable(data.id);
@@ -8,7 +8,7 @@
     self.IsOffline = ko.observable(true);
     self.Messeges = ko.observableArray([]);
     self.MessageToAdd = ko.observable("");
-    self.AllRead = ko.observable(true); 
+    self.AllRead = ko.observable(true);
 
     //computed
     self.AvatarUri = ko.observable("Content/Images/sample.jpg"); //todo add gravatar
@@ -21,7 +21,7 @@
         Chat.getJson("/messages/last/" + self.ConversationId())
             .done(function(data) {
                 for (i of data) {
-                    var message = new MesseageVM(i);
+                    var message = new MesseageVM(root, self, i);
                     self.AddMessegeIfNotExist(message);
                 }
                 self.SortMesseges();

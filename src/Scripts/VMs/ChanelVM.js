@@ -8,11 +8,10 @@
     self.IsOffline = ko.observable(true);
     self.Messeges = ko.observableArray([]);
     self.MessageToAdd = ko.observable("");
-
+    self.AllRead = ko.observable(true); 
 
     //computed
     self.AvatarUri = ko.observable("Content/Images/sample.jpg"); //todo add gravatar
-    self.AllRead = ko.observable(false); //todo add task to check regularity 
 
     //function
     self.GetNewMesseges = function() {
@@ -45,7 +44,6 @@
         Chat.getJson("/conversations/" + self.Id())
             .done(function(data) {
                 self.ConversationId(data.id);
-                self.GetNewMesseges();
             });
     }
 

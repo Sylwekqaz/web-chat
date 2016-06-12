@@ -9,34 +9,39 @@
     self.CurrentUser = ko.observable(new CurrentUserVM());
     self.Login = ko.observable(new LoginVM(self));
 
-    //computed
-    self.SelectedChanel = ko.computed(function() {
-        var selectedChanel = ko.utils.arrayFirst(self.Friends(),
-            function(chanel) {
-                return chanel.Id() === self.SelectedChanelId();
-            });
-        if (!selectedChanel) {
-            selectedChanel = ko.utils.arrayFirst(self.Groups(),
-                function(chanel) {
-                    return chanel.Id() === self.SelectedChanelId();
-                });
-        }
-        return selectedChanel;
-    }); 
-
-    self.PageTemplate = ko.pureComputed(function() {
-        if (!self.CurrentUser().IsLogged()) {
-            return "login-template";
-        }
-        return "chat-main-template";
-    }); // ENUM: chat-main-template, login-template
-
 
     //functions
+    self.GetChanelById = function(id) {
+        var chanel = ko.utils.arrayFirst(self.Friends(),
+            function(c) {
+                return c.Id() === id;
+            });
+        if (!chanel) {
+            chanel = ko.utils.arrayFirst(self.Groups(),
+                function(c) {
+                    return c.Id() === id;
+                });
+        }
+        return chanel;
+    }
 
-    self.FetchFriends = function () {
+    self.GetChanelByConversationId = function(id) {
+        var chanel = ko.utils.arrayFirst(self.Friends(),
+            function(c) {
+                return c.ConversationId() === id;
+            });
+        if (!chanel) {
+            chanel = ko.utils.arrayFirst(self.Groups(),
+                function(c) {
+                    return c.ConversationId() === id;
+                });
+        }
+        return chanel;
+    }
+
+    self.FetchFriends = function() {
         Chat.getJson("/friends/my")
-            .done(function (data) {
+            .done(function(data) {
                 self.Friends.removeAll();
                 for (i of data) {
                     var chanel = new FriendVM(i);
@@ -45,9 +50,9 @@
             });
     }
 
-    self.FetchGroups = function () {
+    self.FetchGroups = function() {
         Chat.getJson("/groups/my")
-            .done(function (data) {
+            .done(function(data) {
                 self.Groups.removeAll();
                 for (i of data) {
                     var chanel = new FriendVM(i);
@@ -58,6 +63,8 @@
 
     self.ChangeChanel = function(chanel) {
         self.SelectedChanelId(chanel.Id());
+        self.SelectedChanel().GetNewMesseges();
+        self.SelectedChanel().AllRead(true);
     }
 
     self.InitializeChat = function() {
@@ -65,13 +72,43 @@
         self.FetchGroups();
     }
 
+    self.CheckUnreadMesseges = function() {
+        Chat.getJson("/messages/unread")
+            .done(function(data) {
+                for (var undearId of data) {
+                    if (undearId === self.SelectedChanel().ConversationId()) {
+                        continue;
+                    }
+                    var unreadChanel = self.GetChanelByConversationId(undearId);
+                    unreadChanel.AllRead(false);
+                }
+            });
+    }
+
+
+    //computed
+    self.SelectedChanel = ko.computed(function() {
+        return self.GetChanelById(self.SelectedChanelId());
+    });
+
+    self.PageTemplate = ko.pureComputed(function() {
+        if (!self.CurrentUser().IsLogged()) {
+            return "login-template";
+        }
+        return "chat-main-template";
+    }); // ENUM: chat-main-template, login-template
+
 
     //ctor
+    var checkUnreadTask = null;
     self.CurrentUser()
         .IsLogged.subscribe(function(newValue) {
             if (newValue) {
+                clearInterval(checkUnreadTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
+                checkUnreadTask = setInterval(self.CheckUnreadMesseges, 10000);
                 self.InitializeChat();
             } else {
+                clearInterval(checkUnreadTask);
                 self.Friends.removeAll();
                 self.Groups.removeAll();
                 self.SelectedChanelId("");

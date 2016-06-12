@@ -6,4 +6,3 @@
     self.UserId = ko.observable(data.userId);
     self.Date = ko.observable(moment(data.date));
 }
-

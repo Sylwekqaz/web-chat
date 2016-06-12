@@ -11,8 +11,8 @@
 
 
     //functions
-    self.SetAuthToken = function (token) {
-        console.log("auth token",token);
+    self.SetAuthToken = function(token) {
+        console.log("auth token", token);
         Chat.SetAuthToken(token);
         self.SaveToken(token);
         self.GetUserData();
@@ -28,21 +28,21 @@
     }
 
 
-    self.Logout = function () {
+    self.Logout = function() {
         Chat.getJson("/user/logout")
-            .done(function (response) {
+            .done(function(response) {
                 self.Clear();
             });
     }
 
-    self.EnableHandlingUnauthorized = function () {
+    self.EnableHandlingUnauthorized = function() {
         Chat.setUnauthorizedCallback(function(xhr) {
             self.Clear();
             return true;
         });
     }
 
-    self.Clear = function () {
+    self.Clear = function() {
         self.IsLogged(false);
         self.Id("");
         self.Name("");
@@ -72,7 +72,6 @@
             });
     }
 
-    
 
     //ctor
     self.EnableHandlingUnauthorized();

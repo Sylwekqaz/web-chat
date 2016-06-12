@@ -90,6 +90,7 @@
             } else {
                 self.Friends.removeAll();
                 self.Groups.removeAll();
+                self.SelectedChanelId("");
             }
         });
 }

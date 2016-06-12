@@ -1,6 +1,6 @@
-﻿<div class="message-group own">
-    <!-- ko if:Messeges-->
-    <!-- ko foreach:Messeges-->
+﻿<!-- ko if:Messeges-->
+<!-- ko foreach:Messeges-->
+<div class="message-group" data-bind="css:{own:IsOwnMessege,other:!IsOwnMessege()}">
     <div class="message-outer">
         <div class="avatar-section">
             <img class="img-circle" src="Content/Images/sample.jpg"/>
@@ -9,9 +9,9 @@
             <div class="message" data-bind="text: Message"></div>
         </div>
     </div>
-    <!-- /ko -->
-    <!-- /ko -->
-    <!-- ko ifnot:Messeges-->
-    <h2>Brak wiadomości</h2>
-    <!-- /ko -->
 </div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko ifnot:Messeges-->
+<h2>Brak wiadomości</h2>
+<!-- /ko -->

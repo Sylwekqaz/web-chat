@@ -65,22 +65,6 @@
         self.FetchGroups();
     }
 
-    //dummy actions for not implemented actions
-    self.clickedCog = function () {
-        alert("Kliknięte ustawienia!");
-    }
-
-    self.clickedDropdown1 = function () {
-        alert("Zrobiłem coś!");
-    }
-
-    self.clickedDropdown2 = function () {
-        alert("Zrobiłem coś innego!");
-    }
-
-    self.clickedAdd = function() {
-        alert("Kliknięte dodawanie!");
-    }
 
     //ctor
     self.CurrentUser()

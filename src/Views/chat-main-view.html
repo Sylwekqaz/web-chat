@@ -1,7 +1,14 @@
 ﻿<div class="chat-wrapper">
     <aside data-bind="template:{ name: 'aside-template', data: $data }"></aside>
     <main>
+        <!-- ko if:SelectedChanel-->
         <section id="messages-section" data-bind="template:{name: 'chanel-template', data: SelectedChanel }"></section>
-        <section id="new-message-section" data-bind="template:{name: 'new-message-template', data: $data }"></section>
+        <section id="new-message-section" data-bind="template:{name: 'new-message-template', data: SelectedChanel }"></section>
+        <!-- /ko -->
+        <!-- ko ifnot:SelectedChanel-->
+        <h2>Wybierz rozmowę</h2>
+
+        <!-- /ko -->
+
     </main>
 </div>

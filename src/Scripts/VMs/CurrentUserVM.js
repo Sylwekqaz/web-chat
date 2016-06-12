@@ -12,6 +12,7 @@
 
     //functions
     self.SetAuthToken = function (token) {
+        console.log("auth token",token);
         Chat.SetAuthToken(token);
         self.SaveToken(token);
         self.GetUserData();

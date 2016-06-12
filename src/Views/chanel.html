@@ -1,17 +1,17 @@
 ﻿<div class="message-group own">
-    <!-- ko if:$data-->
+    <!-- ko if:Messeges-->
     <!-- ko foreach:Messeges-->
     <div class="message-outer">
         <div class="avatar-section">
             <img class="img-circle" src="Content/Images/sample.jpg"/>
         </div>
         <div class="message-inner">
-            <div class="message" data-bind="text: Content"></div>
+            <div class="message" data-bind="text: Message"></div>
         </div>
     </div>
     <!-- /ko -->
     <!-- /ko -->
-    <!-- ko ifnot:$data-->
-    <h2>Wybierz rozmowę</h2>
+    <!-- ko ifnot:Messeges-->
+    <h2>Brak wiadomości</h2>
     <!-- /ko -->
 </div>

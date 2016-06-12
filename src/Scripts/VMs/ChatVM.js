@@ -6,7 +6,6 @@
     self.Groups = ko.observableArray([]);
     self.SelectedChanelId = ko.observable("");
 
-    self.messageToAdd = ko.observable("");
     self.CurrentUser = ko.observable(new CurrentUserVM());
     self.Login = ko.observable(new LoginVM(self));
 
@@ -57,33 +56,6 @@
             });
     }
 
-//    self.FetchLast20Messages = function () {
-//        Chat.getJson("/messages/last", { "id": self.SelectedChanel().ConversationId() })
-//        .done(function (data) {
-//            for (i in data) {
-//                var message = new MesseageVM({Content: data[i].message });
-//                self.SelectedChanel().Messeges().push(message);
-//            }
-//        });
-//    }
-
-//    self.Send = function () {
-//        if (self.messageToAdd() != "") {
-//            Chat.postJson("/messages/send", {
-//                "conversationId": self.SelectedChanel().ConversationId(),
-//                "message": self.messageToAdd()
-//            })
-//            .done(function () {
-//                self.messageToAdd("");
-//            }); 
-//        }
-//    }
-
-    self.sendMessage = function () {
-        self.Send();
-        self.FetchLast20Messages();
-    }
-
     self.ChangeChanel = function(chanel) {
         self.SelectedChanelId(chanel.Id());
     }
@@ -115,6 +87,9 @@
         .IsLogged.subscribe(function(newValue) {
             if (newValue) {
                 self.InitializeChat();
+            } else {
+                self.Friends.removeAll();
+                self.Groups.removeAll();
             }
         });
 }

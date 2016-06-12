@@ -85,6 +85,21 @@
             });
     }
 
+    self.CheckFriendsOnlineStatus = function() {
+        self.Friends()
+            .forEach(function(friend) {
+                Chat.getJson("/friends/online/" + friend.Id())
+                    .done(function(data) {
+                        friend.IsOffline(!data.online);
+                    });
+            });
+    }
+
+    self.LoopTask = function () {
+        self.CheckUnreadMesseges();
+        self.CheckFriendsOnlineStatus();
+    }
+
 
     //computed
     self.SelectedChanel = ko.computed(function() {
@@ -100,15 +115,15 @@
 
 
     //ctor
-    var checkUnreadTask = null;
+    var loopTask = null;
     self.CurrentUser()
         .IsLogged.subscribe(function(newValue) {
             if (newValue) {
-                clearInterval(checkUnreadTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
-                checkUnreadTask = setInterval(self.CheckUnreadMesseges, 10000);
+                clearInterval(loopTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
+                loopTask = setInterval(self.LoopTask, 10000);
                 self.InitializeChat();
             } else {
-                clearInterval(checkUnreadTask);
+                clearInterval(loopTask);
                 self.Friends.removeAll();
                 self.Groups.removeAll();
                 self.SelectedChanelId("");

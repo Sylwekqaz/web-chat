@@ -5,7 +5,9 @@
     //self.IsOffline = ko.observable(true);
 
     //computed
-
+    self.AvatarUri = ko.pureComputed(function() {
+        return gravatar(self.Email(), { size: 60, backup: "identicon" });
+    }); //override chanel property
 
     //functions
 

@@ -6,9 +6,13 @@
 
     self.Id = ko.observable();
     self.Name = ko.observable();
-    self.AvatarUri = ko.observable("");
+   
     self.Email = ko.observable("");
 
+    //computed
+    self.AvatarUri = ko.pureComputed(function () {
+        return gravatar(self.Email(), { size: 60, backup: "identicon" });
+    }); //override chanel property
 
     //functions
     self.SetAuthToken = function(token) {

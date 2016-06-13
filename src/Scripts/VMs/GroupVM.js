@@ -9,4 +9,7 @@
 
     //functions
 
+    //ctor
+    self.IsOffline(false); // by default chanel is online always 
+
 }

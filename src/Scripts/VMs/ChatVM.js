@@ -100,6 +100,8 @@
     }
 
     self.LoopTask = function () {
+        self.FetchFriends();
+        self.FetchGroups();
         self.CheckUnreadMesseges();
         self.CheckFriendsOnlineStatus();
     }

@@ -42,9 +42,8 @@
     self.FetchFriends = function() {
         Chat.getJson("/friends/my")
             .done(function(data) {
-                self.Friends.removeAll();
                 for (i of data) {
-                    var match = self.GetChanelByConversationId(i.id);
+                    var match = self.GetChanelById(i.id);
                     if (!match) {
                         self.Friends.push(new FriendVM(self, i));
                     }
@@ -55,9 +54,8 @@
     self.FetchGroups = function() {
         Chat.getJson("/groups/my")
             .done(function(data) {
-                self.Groups.removeAll();
                 for (i of data) {
-                    var match = self.GetChanelByConversationId(i.id);
+                    var match = self.GetChanelById(i.id);
                     if (!match) {
                         self.Groups.push(new GroupVM(self, i));
                     }

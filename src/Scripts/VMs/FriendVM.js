@@ -10,5 +10,13 @@
     }); //override chanel property
 
     //functions
+    self.GetConversationId = function () {
+        Chat.getJson("/conversations/" + self.Id())
+            .done(function (data) {
+                self.ConversationId(data.id);
+            });
+    }
 
+    //ctor
+    self.GetConversationId();
 }

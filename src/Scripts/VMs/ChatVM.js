@@ -119,9 +119,9 @@
     self.CurrentUser()
         .IsLogged.subscribe(function(newValue) {
             if (newValue) {
+                self.InitializeChat();
                 clearInterval(loopTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
                 loopTask = setInterval(self.LoopTask, 10000);
-                self.InitializeChat();
             } else {
                 clearInterval(loopTask);
                 self.Friends.removeAll();

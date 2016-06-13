@@ -40,13 +40,6 @@
         return !match;
     }
 
-    self.GetConversationId = function() {
-        Chat.getJson("/conversations/" + self.Id())
-            .done(function(data) {
-                self.ConversationId(data.id);
-            });
-    }
-
     self.SortMesseges = function() {
         self.Messeges.sort(function(left, right) {
             return left.Date() === right.Date() ? 0 : (left.Date() < right.Date() ? -1 : 1);
@@ -71,8 +64,4 @@
             });
 
     }
-
-
-    //ctor
-    self.GetConversationId();
 }

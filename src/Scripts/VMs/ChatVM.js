@@ -44,8 +44,10 @@
             .done(function(data) {
                 self.Friends.removeAll();
                 for (i of data) {
-                    var chanel = new FriendVM(self, i);
-                    self.Friends.push(chanel);
+                    var match = self.GetChanelByConversationId(i.id);
+                    if (!match) {
+                        self.Friends.push(new FriendVM(self, i));
+                    }
                 }
             });
     }
@@ -55,8 +57,10 @@
             .done(function(data) {
                 self.Groups.removeAll();
                 for (i of data) {
-                    var chanel = new GroupVM(self, i);
-                    self.Groups.push(chanel);
+                    var match = self.GetChanelByConversationId(i.id);
+                    if (!match) {
+                        self.Groups.push(new GroupVM(self, i));
+                    }
                 }
             });
     }

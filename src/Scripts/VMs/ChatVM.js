@@ -100,6 +100,49 @@
         self.CheckFriendsOnlineStatus();
     }
 
+    self.ShowAddFriendModal = function() {
+        bootbox.dialog({
+                title: "Dodaj znajomego",
+                message: $('#add-friend-template').html(),
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function() {
+                            console.log($(".friend-select").val());
+                        }
+                    }
+                }
+            }
+        );
+
+        $(".friend-select").select2({
+            ajax: {
+                url: "http://chatbackend-chat22.rhcloud.com/user/search",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    "X-Auth-Token": window.localStorage.AuthToken,
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: $.map(data, function (obj) {
+                            return { id: obj.id, text: obj.name };
+                        }),
+                    };
+                },
+                delay: 250,
+                data: function (params) {
+                    return JSON.stringify({
+                        "email": params.term,
+                        "name": params.term
+                    });
+                }
+            }
+        });
+    }
+
 
     //computed
     self.SelectedChanel = ko.computed(function() {

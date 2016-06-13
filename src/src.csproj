@@ -94,6 +94,7 @@
     <Content Include="Scripts\VMs\MesseageVM.js" />
     <Content Include="Scripts\VMs\ChanelVM.js" />
     <Content Include="Scripts\VMs\ChatVM.js" />
+    <Content Include="Views\add-friend-body.html" />
     <Content Include="Views\aside.html" />
     <Content Include="Views\chat-main-view.html" />
     <Content Include="Views\login.html" />

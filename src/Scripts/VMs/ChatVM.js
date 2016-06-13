@@ -153,6 +153,25 @@
         });
     }
 
+    self.ShowAddGroupModal = function () {
+        bootbox.prompt("Podaj nazwę grupy",
+            function(newGroupname) {
+                if (newGroupname != null) {
+                    Chat.getJson("/groups/create ")
+                        .done(function(response) {
+                            Chat.postJson("/groups/rename",
+                                {
+                                    "groupId": response.id,
+                                    "newName": newGroupname
+                                })
+                                .done(function() {
+                                    self.FetchGroups();
+                                });
+                        });
+                }
+            });
+    }
+
     self.AddFriend = function(id) {
         Chat.postJson("/friends/add/" + id)
             .done(function() {

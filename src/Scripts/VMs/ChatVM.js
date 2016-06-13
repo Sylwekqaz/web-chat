@@ -101,11 +101,12 @@
             });
     }
 
-    self.LoopTask = function () {
-        self.FetchFriends();
-        self.FetchGroups();
-        self.CheckUnreadMesseges();
+    self.CheckOnlineTask = function() {
         self.CheckFriendsOnlineStatus();
+    }
+
+    self.CheckUnreadTask = function() {
+        self.CheckUnreadMesseges();
     }
 
     self.ShowAddFriendModal = function() {
@@ -196,15 +197,21 @@
 
 
     //ctor
-    var loopTask = null;
+    var checkOnlineTask = null;
+    var checkUnreadTask = null;
     self.CurrentUser()
         .IsLogged.subscribe(function(newValue) {
             if (newValue) {
                 self.InitializeChat();
-                clearInterval(loopTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
-                loopTask = setInterval(self.LoopTask, 10000);
+                clearInterval(checkOnlineTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
+                clearInterval(checkUnreadTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
+                checkOnlineTask = setInterval(self.CheckOnlineTask, 30000);
+                checkUnreadTask = setInterval(self.CheckUnreadTask, 1000);
+                self.CheckOnlineTask();
+                self.CheckUnreadTask();
             } else {
-                clearInterval(loopTask);
+                clearInterval(checkOnlineTask);
+                clearInterval(checkUnreadTask);
                 self.Friends.removeAll();
                 self.Groups.removeAll();
                 self.SelectedChanelId("");

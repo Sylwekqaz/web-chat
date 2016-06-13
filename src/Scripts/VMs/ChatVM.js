@@ -112,8 +112,8 @@
                     success: {
                         label: "Save",
                         className: "btn-success",
-                        callback: function() {
-                            console.log($(".friend-select").val());
+                        callback: function () {
+                            self.AddFriend($(".friend-select").val());
                         }
                     }
                 }
@@ -145,6 +145,13 @@
                 }
             }
         });
+    }
+
+    self.AddFriend = function(id) {
+        Chat.postJson("/friends/add/" + id)
+            .done(function() {
+                self.FetchFriends();
+            });
     }
 
 

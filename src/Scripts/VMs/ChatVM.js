@@ -131,9 +131,13 @@
                 },
                 processResults: function (data, params) {
                     return {
-                        results: $.map(data, function (obj) {
-                            return { id: obj.id, text: obj.name };
-                        }),
+                        results: $.map(data,
+                                function(obj) {
+                                    return { id: obj.id, text: obj.name };
+                                })
+                            .filter(function(element) {
+                                return !self.GetChanelById(element.id);
+                            }),
                     };
                 },
                 delay: 250,

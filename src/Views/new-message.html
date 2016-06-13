@@ -1,4 +1,20 @@
 ﻿<form data-bind="submit: Send" id="chat-message">
-    <input data-bind="value: MessageToAdd, valueUpdate: 'afterkeydown', enterkey:Send" id="message" type="text" autocomplete="off">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="input-group">
+                <input data-bind="value: MessageToAdd, valueUpdate: 'afterkeydown', enterkey:Send"
+                       type="text"
+                       id="message"
+                       class="form-control"
+                       autocomplete="off"
+                       placeholder="Enter message...">
+
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">Emots</button>
+                </span>
+            </div>
+        </div>
+        </div>
+
     <button type="button" data-bind="click:Send">Submit</button>
 </form>

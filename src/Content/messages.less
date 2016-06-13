@@ -5,6 +5,7 @@
 
 main {
     display: flex;
+    overflow: hidden;
     background-color: @textPrimaryColor;
     -ms-flex: 1;
     -webkit-flex: 1;
@@ -97,6 +98,8 @@ main {
                 border-radius: 6px;
                 padding: 5px;
                 margin: @messages-margin @messages-margin 0 @messages-margin;
+                overflow-wrap: break-word;
+                max-width: 80%;
             }
         }
     }

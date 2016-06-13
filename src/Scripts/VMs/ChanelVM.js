@@ -25,6 +25,7 @@
                     self.AddMessegeIfNotExist(message);
                 }
                 self.SortMesseges();
+                self.scrollBottom();
             });
     }
 
@@ -63,5 +64,9 @@
                 self.GetNewMesseges();
             });
 
+    }
+
+    self.scrollBottom = function () {
+        $('#messages-section').scrollTop($('#messages-section')[0].scrollHeight);
     }
 }

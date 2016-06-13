@@ -78,9 +78,13 @@
         Chat.getJson("/messages/unread")
             .done(function(data) {
                 for (var undearId of data) {
-                    if (undearId === self.SelectedChanel().ConversationId()) {
-                        continue;
+                    if (self.SelectedChanel()) {
+                        if (undearId === self.SelectedChanel().ConversationId()) {
+                            self.SelectedChanel().GetNewMesseges();
+                            continue;
+                        }
                     }
+
                     var unreadChanel = self.GetChanelByConversationId(undearId);
                     unreadChanel.AllRead(false);
                 }

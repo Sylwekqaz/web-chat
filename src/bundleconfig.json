@@ -24,7 +24,9 @@
       "Scripts/libs/MaterialForms.js",
       "Scripts/libs/gravatar.js",
       "Scripts/libs/moment-with-locales.js",
-      "Scripts/libs/bootbox.js"
+      "Scripts/libs/bootbox.js",
+      "Scripts/libs/select2.js",
+      "Scripts/libs/select2-pl.js"
     ]
   }
 ]

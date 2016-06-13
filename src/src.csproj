@@ -42,6 +42,7 @@
   <ItemGroup>
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\select2\select2.css" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
@@ -84,6 +85,8 @@
     <Content Include="Scripts\libs\MaterialForms.js" />
     <Content Include="Scripts\libs\moment-with-locales.js" />
     <Content Include="Scripts\libs\moment.js" />
+    <Content Include="Scripts\libs\select2-pl.js" />
+    <Content Include="Scripts\libs\select2.js" />
     <Content Include="Scripts\VMs\GroupVM.js" />
     <Content Include="Scripts\VMs\FriendVM.js" />
     <Content Include="Scripts\VMs\CurrentUserVM.js" />

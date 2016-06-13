@@ -64,6 +64,7 @@
     <Content Include="Scripts\Libs.min.js">
       <DependentUpon>Libs.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\libs\bootbox.js" />
     <Content Include="Scripts\libs\bootstrap.js" />
     <Content Include="bundleconfig.json" />
     <Content Include="compilerconfig.json" />

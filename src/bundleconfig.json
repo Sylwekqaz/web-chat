@@ -23,7 +23,8 @@
       "Scripts/libs/moment.js",
       "Scripts/libs/MaterialForms.js",
       "Scripts/libs/gravatar.js",
-      "Scripts/libs/moment-with-locales.js"
+      "Scripts/libs/moment-with-locales.js",
+      "Scripts/libs/bootbox.js"
     ]
   }
 ]

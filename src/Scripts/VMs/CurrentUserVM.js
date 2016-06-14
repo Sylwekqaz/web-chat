@@ -6,12 +6,17 @@
 
     self.Id = ko.observable();
     self.Name = ko.observable();
-    self.AvatarUri = ko.observable("");
+   
     self.Email = ko.observable("");
 
+    //computed
+    self.AvatarUri = ko.pureComputed(function () {
+        return gravatar(self.Email(), { size: 60, backup: "identicon" });
+    }); //override chanel property
 
     //functions
-    self.SetAuthToken = function (token) {
+    self.SetAuthToken = function(token) {
+        console.log("auth token", token);
         Chat.SetAuthToken(token);
         self.SaveToken(token);
         self.GetUserData();
@@ -27,26 +32,25 @@
     }
 
 
-    self.Logout = function () {
+    self.Logout = function() {
         Chat.getJson("/user/logout")
-            .done(function (response) {
+            .done(function(response) {
                 self.Clear();
             });
     }
 
-    self.EnableHandlingUnauthorized = function () {
+    self.EnableHandlingUnauthorized = function() {
         Chat.setUnauthorizedCallback(function(xhr) {
             self.Clear();
             return true;
         });
     }
 
-    self.Clear = function () {
+    self.Clear = function() {
         self.IsLogged(false);
         self.Id("");
         self.Name("");
         self.Email("");
-        self.AvatarUri("");
         self.SaveToken("");
 
         //todo clear other shit when detect user was logged out
@@ -67,11 +71,9 @@
                 self.Id(response.id);
                 self.Name(response.name);
                 self.Email(response.email);
-                self.AvatarUri("Content/Images/sample.jpg"); //todo
             });
     }
 
-    
 
     //ctor
     self.EnableHandlingUnauthorized();

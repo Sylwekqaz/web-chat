@@ -42,6 +42,7 @@
   <ItemGroup>
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\select2\select2.css" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
@@ -64,6 +65,7 @@
     <Content Include="Scripts\Libs.min.js">
       <DependentUpon>Libs.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\libs\bootbox.js" />
     <Content Include="Scripts\libs\bootstrap.js" />
     <Content Include="bundleconfig.json" />
     <Content Include="compilerconfig.json" />
@@ -71,19 +73,28 @@
     <Content Include="Content\aside.less" />
     <Content Include="Content\variables.less" />
     <Content Include="Content\Login.less" />
-    <Content Include="Content\MaterialForms.less" />
+    <Content Include="Content\Material\Forms.less" />
+    <Content Include="Content\Material\Fab.less" />
+    <Content Include="Content\Material\Material.less" />
+    <Content Include="Content\messages.less" />
     <None Include="Scripts\libs\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\libs\gravatar.js" />
     <Content Include="Scripts\libs\jquery-1.9.1.js" />
     <Content Include="Scripts\libs\knockout-3.4.0.js" />
     <Content Include="Scripts\libs\knockout.mapping-latest.js" />
     <Content Include="Scripts\libs\MaterialForms.js" />
     <Content Include="Scripts\libs\moment-with-locales.js" />
     <Content Include="Scripts\libs\moment.js" />
+    <Content Include="Scripts\libs\select2-pl.js" />
+    <Content Include="Scripts\libs\select2.js" />
+    <Content Include="Scripts\VMs\GroupVM.js" />
+    <Content Include="Scripts\VMs\FriendVM.js" />
     <Content Include="Scripts\VMs\CurrentUserVM.js" />
     <Content Include="Scripts\VMs\LoginVM.js" />
     <Content Include="Scripts\VMs\MesseageVM.js" />
     <Content Include="Scripts\VMs\ChanelVM.js" />
     <Content Include="Scripts\VMs\ChatVM.js" />
+    <Content Include="Views\add-friend-body.html" />
     <Content Include="Views\aside.html" />
     <Content Include="Views\chat-main-view.html" />
     <Content Include="Views\login.html" />

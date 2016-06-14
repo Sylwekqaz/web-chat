@@ -1,0 +1,111 @@
+﻿@user-message-color: #419f8d;
+@user-message-text-color: #fff;
+@messages-margin: 5px;
+@avatar-size: 60px;
+
+main {
+    display: flex;
+    overflow: hidden;
+    background-color: @textPrimaryColor;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+
+    header {
+        background-color: burlywood;
+        height: 100px;
+    }
+
+    #messages-section {
+        -ms-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        overflow: auto;
+
+        & > * {
+            display: block;
+        }
+
+        .message-group {
+            .avatar-section {
+                img {
+                    width: @avatar-size; 
+                    height: @avatar-size;
+                }
+            }
+
+            .message-sent-time {
+                display: block;
+                clear: both;
+                color: #888;
+            }
+        }
+
+        .message-group.own {
+            .avatar-section {
+                float: right;
+            }
+
+           .message-inner {
+                .message {
+                    float: right;
+                    background-color: @user-message-color;
+                    color: @user-message-text-color;
+                }
+           }
+
+           .message-sent-time {
+               float: right;
+               margin-right: @messages-margin;
+           }
+        }
+
+        .message-group.other {
+            .avatar-section {
+                float: left;
+            }
+
+           .message-inner {
+               .message {
+                    float: left;
+                    background-color: burlywood;
+                    color: black;
+               }
+           }
+
+           .message-sent-time {
+               float: left;
+               margin-left: @messages-margin;
+           }
+        }
+
+        .message-outer {
+            overflow: auto;
+            margin: @messages-margin;
+        }
+
+        .message-inner:after {
+            clear: both;
+        }
+
+        .message-inner {
+            overflow: auto;
+
+            .message {
+                border-radius: 6px;
+                padding: 5px;
+                margin: @messages-margin @messages-margin 0 @messages-margin;
+                overflow-wrap: break-word;
+                max-width: 80%;
+            }
+        }
+    }
+
+    #new-message-section {
+        height: 100px;
+        background-color: darkgrey;
+    }
+}

@@ -1,6 +1,13 @@
-﻿function MesseageVM(data) {
+﻿function MesseageVM(root, chanel, data) {
     var self = this;
 
-    self.Content = ko.observable(data.Content);
-}
+    self.Id = ko.observable(data.id);
+    self.Message = ko.observable(data.message);
+    self.UserId = ko.observable(data.userId);
+    self.Date = ko.observable(moment(data.date));
 
+    //computed
+    self.IsOwnMessege = ko.pureComputed(function() {
+        return self.UserId() === root.CurrentUser().Id();
+    });
+}

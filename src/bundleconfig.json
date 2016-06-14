@@ -5,11 +5,13 @@
       "Scripts/bindings/enter-bindings.js",
       "Scripts/bindings/Validation/knockout.validation.js",
       "Scripts/bindings/Validation/pl-PL.js",
-      "Scripts/VMs/ChatVM.js",
       "Scripts/VMs/ChanelVM.js",
+      "Scripts/VMs/FriendVM.js",
+      "Scripts/VMs/GroupVM.js",
       "Scripts/VMs/MesseageVM.js",
       "Scripts/VMs/LoginVM.js",
-      "Scripts/VMs/CurrentUserVM.js"
+      "Scripts/VMs/CurrentUserVM.js",
+      "Scripts/VMs/ChatVM.js"
     ]
   },
   {
@@ -20,7 +22,11 @@
       "Scripts/libs/knockout-3.4.0.js",
       "Scripts/libs/moment.js",
       "Scripts/libs/MaterialForms.js",
-      "Scripts/libs/moment-with-locales.js"
+      "Scripts/libs/gravatar.js",
+      "Scripts/libs/moment-with-locales.js",
+      "Scripts/libs/bootbox.js",
+      "Scripts/libs/select2.js",
+      "Scripts/libs/select2-pl.js"
     ]
   }
 ]

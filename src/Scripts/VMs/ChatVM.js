@@ -2,26 +2,190 @@
     var self = this;
 
     //observables
-    self.ContactChannels = ko.observableArray([]);
-    self.GroupChannels = ko.observableArray([]);
-    self.messageToAdd = ko.observable("");
-    self.SelectedChanelName = ko.observable("");
+    self.Friends = ko.observableArray([]);
+    self.Groups = ko.observableArray([]);
+    self.SelectedChanelId = ko.observable("");
+
     self.CurrentUser = ko.observable(new CurrentUserVM());
     self.Login = ko.observable(new LoginVM(self));
 
-    //computed
-    self.SelectedChanel = ko.computed(function() {
-        var selectedChanel = ko.utils.arrayFirst(self.ContactChannels(),
-            function(chanel) {
-                return chanel.Name() === self.SelectedChanelName();
+
+    //functions
+    self.GetChanelById = function(id) {
+        var chanel = ko.utils.arrayFirst(self.Friends(),
+            function(c) {
+                return c.Id() === id;
             });
-        if (!selectedChanel) {
-            selectedChanel = ko.utils.arrayFirst(self.GroupChannels(),
-                function(chanel) {
-                    return chanel.Name() === self.SelectedChanelName();
+        if (!chanel) {
+            chanel = ko.utils.arrayFirst(self.Groups(),
+                function(c) {
+                    return c.Id() === id;
                 });
         }
-        return selectedChanel;
+        return chanel;
+    }
+
+    self.GetChanelByConversationId = function(id) {
+        var chanel = ko.utils.arrayFirst(self.Friends(),
+            function(c) {
+                return c.ConversationId() === id;
+            });
+        if (!chanel) {
+            chanel = ko.utils.arrayFirst(self.Groups(),
+                function(c) {
+                    return c.ConversationId() === id;
+                });
+        }
+        return chanel;
+    }
+
+    self.FetchFriends = function() {
+        Chat.getJson("/friends/my")
+            .done(function(data) {
+                for (i of data) {
+                    var match = self.GetChanelById(i.id);
+                    if (!match) {
+                        self.Friends.push(new FriendVM(self, i));
+                    }
+                }
+            });
+    }
+
+    self.FetchGroups = function() {
+        Chat.getJson("/groups/my")
+            .done(function(data) {
+                for (i of data) {
+                    var match = self.GetChanelById(i.id);
+                    if (!match) {
+                        self.Groups.push(new GroupVM(self, i));
+                    }
+                }
+            });
+    }
+
+    self.ChangeChanel = function(chanel) {
+        self.SelectedChanelId(chanel.Id());
+        self.SelectedChanel().GetNewMesseges();
+        self.SelectedChanel().AllRead(true);
+    }
+
+    self.InitializeChat = function() {
+        self.FetchFriends();
+        self.FetchGroups();
+    }
+
+    self.CheckUnreadMesseges = function() {
+        Chat.getJson("/messages/unread")
+            .done(function(data) {
+                for (var undearId of data) {
+                    if (self.SelectedChanel()) {
+                        if (undearId === self.SelectedChanel().ConversationId()) {
+                            self.SelectedChanel().GetNewMesseges();
+                            continue;
+                        }
+                    }
+
+                    var unreadChanel = self.GetChanelByConversationId(undearId);
+                    unreadChanel.AllRead(false);
+                }
+            });
+    }
+
+    self.CheckFriendsOnlineStatus = function() {
+        self.Friends()
+            .forEach(function(friend) {
+                Chat.getJson("/friends/online/" + friend.Id())
+                    .done(function(data) {
+                        friend.IsOffline(!data.online);
+                    });
+            });
+    }
+
+    self.CheckOnlineTask = function() {
+        self.CheckFriendsOnlineStatus();
+    }
+
+    self.CheckUnreadTask = function() {
+        self.CheckUnreadMesseges();
+    }
+
+    self.ShowAddFriendModal = function() {
+        bootbox.dialog({
+                title: "Dodaj znajomego",
+                message: $('#add-friend-template').html(),
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            self.AddFriend($(".friend-select").val());
+                        }
+                    }
+                }
+            }
+        );
+
+        $(".friend-select").select2({
+            ajax: {
+                url: "http://chatbackend-chat22.rhcloud.com/user/search",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    "X-Auth-Token": window.localStorage.AuthToken,
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: $.map(data,
+                                function(obj) {
+                                    return { id: obj.id, text: obj.name };
+                                })
+                            .filter(function(element) {
+                                return !self.GetChanelById(element.id);
+                            }),
+                    };
+                },
+                delay: 250,
+                data: function (params) {
+                    return JSON.stringify({
+                        "email": params.term,
+                        "name": params.term
+                    });
+                }
+            }
+        });
+    }
+
+    self.ShowAddGroupModal = function () {
+        bootbox.prompt("Podaj nazwę grupy",
+            function(newGroupname) {
+                if (newGroupname != null) {
+                    Chat.getJson("/groups/create ")
+                        .done(function(response) {
+                            Chat.postJson("/groups/rename",
+                                {
+                                    "groupId": response.id,
+                                    "newName": newGroupname
+                                })
+                                .done(function() {
+                                    self.FetchGroups();
+                                });
+                        });
+                }
+            });
+    }
+
+    self.AddFriend = function(id) {
+        Chat.postJson("/friends/add/" + id)
+            .done(function() {
+                self.FetchFriends();
+            });
+    }
+
+
+    //computed
+    self.SelectedChanel = ko.computed(function() {
+        return self.GetChanelById(self.SelectedChanelId());
     });
 
     self.PageTemplate = ko.pureComputed(function() {
@@ -32,62 +196,25 @@
     }); // ENUM: chat-main-template, login-template
 
 
-    //functions
-    self.sendMessage = function () {
-        if (self.messageToAdd() != "") {
-            var message = new MesseageVM({ Content: self.messageToAdd() });
-            self.SelectedChanel().Messeges.push(message);
-            self.messageToAdd("");
-        }
-    }
-
-    self.ChangeChanel = function(chanel) {
-        self.SelectedChanelName(chanel.Name());
-    }
-
-    self.clickedCog = function () {
-        alert("Kliknięte ustawienia!");
-    }
-
-    self.clickedOff = function () {
-        alert("Kliknięte wylogowywanie!");
-    }
-
-    self.clickedDropdown1 = function () {
-        alert("Zrobiłem coś!");
-    }
-
-    self.clickedDropdown2 = function () {
-        alert("Zrobiłem coś innego!");
-    }
-
-    self.clickedAdd = function() {
-        alert("Kliknięte dodawanie!");
-    }
-
-
-    //test initialize data
-    var chanel1 = new ChanelVM({ Name: "Kontakt 1", AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });
-    var chanel2 = new ChanelVM({ Name: "Kontakt 2", AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: true });
-    var chanel3 = new ChanelVM({ Name: "Kontakt 3", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: false });
-    var chanel4 = new ChanelVM({ Name: "Kontakt 4", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
-    var chanel5 = new ChanelVM({ Name: "Kontakt 5", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
-    self.ContactChannels.push(chanel1);
-    self.ContactChannels.push(chanel2);
-    self.ContactChannels.push(chanel3);
-    self.ContactChannels.push(chanel4);
-    self.ContactChannels.push(chanel5);
-
-    var chanel6 = new ChanelVM({ Name: "Grupa 1", AvatarUri: "Content/Images/sample.jpg", IsOffline: false, AllRead: false });
-    var chanel7 = new ChanelVM({ Name: "Grupa 2", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: false });
-    var chanel8 = new ChanelVM({ Name: "Grupa 3", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
-    var chanel9 = new ChanelVM({ Name: "Grupa 4", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
-    var chanel10 = new ChanelVM({ Name: "Grupa 5", AvatarUri: "Content/Images/sample.jpg", IsOffline: true, AllRead: true });
-    self.GroupChannels.push(chanel6);
-    self.GroupChannels.push(chanel7);
-    self.GroupChannels.push(chanel8);
-    self.GroupChannels.push(chanel9);
-    self.GroupChannels.push(chanel10);
-
-    self.SelectedChanelName("Kontakt 1");
+    //ctor
+    var checkOnlineTask = null;
+    var checkUnreadTask = null;
+    self.CurrentUser()
+        .IsLogged.subscribe(function(newValue) {
+            if (newValue) {
+                self.InitializeChat();
+                clearInterval(checkOnlineTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
+                clearInterval(checkUnreadTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
+                checkOnlineTask = setInterval(self.CheckOnlineTask, 30000);
+                checkUnreadTask = setInterval(self.CheckUnreadTask, 1000);
+                self.CheckOnlineTask();
+                self.CheckUnreadTask();
+            } else {
+                clearInterval(checkOnlineTask);
+                clearInterval(checkUnreadTask);
+                self.Friends.removeAll();
+                self.Groups.removeAll();
+                self.SelectedChanelId("");
+            }
+        });
 }

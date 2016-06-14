@@ -73,6 +73,7 @@
         Chat.postJson("/user/register",
             {
                 "name": self.Username(),
+                "email": self.Mail(),
                 "password": self.Password()
             })
             .done(function() {

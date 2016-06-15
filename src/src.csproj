@@ -95,6 +95,9 @@
     <Content Include="Scripts\VMs\MesseageVM.js" />
     <Content Include="Scripts\VMs\ChanelVM.js" />
     <Content Include="Scripts\VMs\ChatVM.js" />
+    <Content Include="Sounds\new-messege.aac" />
+    <Content Include="Sounds\new-messege.mp3" />
+    <Content Include="Sounds\new-messege.wav" />
     <Content Include="Views\add-friend-body.html" />
     <Content Include="Views\aside.html" />
     <Content Include="Views\chat-main-view.html" />
@@ -105,11 +108,11 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Sounds\new-messege.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\" />
     <Folder Include="Properties\" />
-    <Folder Include="Sounds\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\alerts.less" />

@@ -238,7 +238,7 @@
                 self.InitializeChat();
                 clearInterval(checkOnlineTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
                 clearInterval(checkUnreadTask); //lets be sure that we dont owerwrite taskId and allow to memory leak
-                checkOnlineTask = setInterval(self.CheckOnlineTask, 30000);
+                checkOnlineTask = setInterval(self.CheckOnlineTask, 5000);
                 checkUnreadTask = setInterval(self.CheckUnreadTask, 1000);
                 self.CheckOnlineTask();
                 self.CheckUnreadTask();

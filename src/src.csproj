@@ -79,6 +79,7 @@
     <Content Include="Content\messages.less" />
     <None Include="Scripts\libs\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\libs\gravatar.js" />
+    <Content Include="Scripts\libs\ion.sound.js" />
     <Content Include="Scripts\libs\jquery-1.9.1.js" />
     <Content Include="Scripts\libs\knockout-3.4.0.js" />
     <Content Include="Scripts\libs\knockout.mapping-latest.js" />
@@ -108,6 +109,7 @@
   <ItemGroup>
     <Folder Include="Content\Images\" />
     <Folder Include="Properties\" />
+    <Folder Include="Sounds\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\alerts.less" />

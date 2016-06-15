@@ -83,7 +83,12 @@
             });
     }
 
-    self.ChangeChanel = function(chanel) {
+    self.ChangeChanel = function (chanel,event) {
+        if (event) {
+            if (event.target.classList.contains("glyphicon")) {
+                return;
+            }
+        }
         self.SelectedChanelId(chanel.Id());
         self.SelectedChanel().GetNewMesseges();
         self.SelectedChanel().AllRead(true);

@@ -77,6 +77,7 @@
     self.CheckUnreadMesseges = function() {
         Chat.getJson("/messages/unread")
             .done(function(data) {
+                var shouldPlayNotification = false;
                 for (var undearId of data) {
                     if (self.SelectedChanel()) {
                         if (undearId === self.SelectedChanel().ConversationId()) {
@@ -86,7 +87,18 @@
                     }
 
                     var unreadChanel = self.GetChanelByConversationId(undearId);
-                    unreadChanel.AllRead(false);
+                    if (unreadChanel == null) {
+                        self.FetchFriends();
+                        self.FetchGroups();
+                        return;
+                    }
+                    if (unreadChanel.AllRead()) {
+                        shouldPlayNotification = true;
+                        unreadChanel.AllRead(false);
+                    }
+                }
+                if (shouldPlayNotification) { 
+                    ion.sound.play("new-messege");
                 }
             });
     }

@@ -88,6 +88,7 @@
     <Content Include="Scripts\libs\moment.js" />
     <Content Include="Scripts\libs\select2-pl.js" />
     <Content Include="Scripts\libs\select2.js" />
+    <Content Include="Scripts\VMs\UserVM.js" />
     <Content Include="Scripts\VMs\GroupVM.js" />
     <Content Include="Scripts\VMs\FriendVM.js" />
     <Content Include="Scripts\VMs\CurrentUserVM.js" />

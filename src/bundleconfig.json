@@ -5,6 +5,7 @@
       "Scripts/bindings/enter-bindings.js",
       "Scripts/bindings/Validation/knockout.validation.js",
       "Scripts/bindings/Validation/pl-PL.js",
+      "Scripts/VMs/UserVM.js",
       "Scripts/VMs/ChanelVM.js",
       "Scripts/VMs/FriendVM.js",
       "Scripts/VMs/GroupVM.js",

@@ -5,12 +5,21 @@
     self.Friends = ko.observableArray([]);
     self.Groups = ko.observableArray([]);
     self.SelectedChanelId = ko.observable("");
+    self.Users = ko.observableArray([]);
 
     self.CurrentUser = ko.observable(new CurrentUserVM());
     self.Login = ko.observable(new LoginVM(self));
 
 
     //functions
+    self.GetUserById = function(id) {
+        var user = ko.utils.arrayFirst(self.Users(),
+            function(c) {
+                return c.Id() === id;
+            });
+        return user;
+    }
+
     self.GetChanelById = function(id) {
         var chanel = ko.utils.arrayFirst(self.Friends(),
             function(c) {
@@ -42,10 +51,14 @@
     self.FetchFriends = function() {
         Chat.getJson("/friends/my")
             .done(function(data) {
-                for (i of data) {
-                    var match = self.GetChanelById(i.id);
+                for (friend of data) {
+                    var match = self.GetChanelById(friend.id);
                     if (!match) {
-                        self.Friends.push(new FriendVM(self, i));
+                        self.Friends.push(new FriendVM(self, friend));
+                    }
+                    var user = self.GetUserById(friend.id);
+                    if (!user) {
+                        self.Users.push(new UserVM(self, friend));
                     }
                 }
             });
@@ -54,11 +67,18 @@
     self.FetchGroups = function() {
         Chat.getJson("/groups/my")
             .done(function(data) {
-                for (i of data) {
-                    var match = self.GetChanelById(i.id);
+                for (group of data) {
+                    var match = self.GetChanelById(group.id);
                     if (!match) {
-                        self.Groups.push(new GroupVM(self, i));
+                        self.Groups.push(new GroupVM(self, group));
                     }
+                    for (var user of group.users) {
+                        var exist = self.GetUserById(user.id);
+                        if (!exist) {
+                            self.Users.push(new UserVM(self, user));
+                        }
+                    }
+
                 }
             });
     }
@@ -227,6 +247,7 @@
                 clearInterval(checkUnreadTask);
                 self.Friends.removeAll();
                 self.Groups.removeAll();
+                self.Users.removeAll();
                 self.SelectedChanelId("");
             }
         });

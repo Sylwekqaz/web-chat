@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\App.js" />
+    <Content Include="Scripts\bindings\tooltip-bindings.js" />
     <Content Include="Scripts\bindings\enter-bindings.js" />
     <Content Include="Scripts\bindings\Validation\knockout.validation.js" />
     <Content Include="Scripts\bindings\Validation\pl-PL.js" />
@@ -88,6 +89,7 @@
     <Content Include="Scripts\libs\moment.js" />
     <Content Include="Scripts\libs\select2-pl.js" />
     <Content Include="Scripts\libs\select2.js" />
+    <Content Include="Scripts\VMs\UserVM.js" />
     <Content Include="Scripts\VMs\GroupVM.js" />
     <Content Include="Scripts\VMs\FriendVM.js" />
     <Content Include="Scripts\VMs\CurrentUserVM.js" />

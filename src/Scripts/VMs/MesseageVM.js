@@ -10,4 +10,25 @@
     self.IsOwnMessege = ko.pureComputed(function() {
         return self.UserId() === root.CurrentUser().Id();
     });
+
+    self.User = ko.pureComputed(function () {
+        var user = root.GetUserById(self.UserId());
+        if (!user) {
+            user = new UserVM(root, {
+                "email": "",
+                "id": self.UserId(),
+                "name": ""
+            }); //return empty user to simplify view logic 
+            root.FetchFriends();
+            root.FetchGroups();
+        }
+
+        return user;
+    });
+
+    self.TooltipMessege = ko.pureComputed(function () {
+        
+
+        return self.User().Name() + " " + self.Date().fromNow();
+    });
 }

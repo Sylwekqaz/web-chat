@@ -47,6 +47,7 @@
         }
 
         Promise.all($('script[type="text/html"][src]').map(function() { return LoadScriptInline(this); }).get())
+            .then(InitializeMoment)
             .then(InitializeIonSound)
             .then(InitializeKO)
             .catch(function(element) { console.error("Problem with loading template", element); });
@@ -64,6 +65,13 @@
                 multiplay:true,
             });
         }
+
+        function InitializeMoment() {
+            var locale = window.navigator.userLanguage || window.navigator.language;
+            moment.locale(locale);
+        }
+
+       
     </script>
 </div>
 </body>

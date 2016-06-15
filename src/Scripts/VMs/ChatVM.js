@@ -82,6 +82,7 @@
                     if (self.SelectedChanel()) {
                         if (undearId === self.SelectedChanel().ConversationId()) {
                             self.SelectedChanel().GetNewMesseges();
+                            shouldPlayNotification = true;
                             continue;
                         }
                     }

@@ -156,6 +156,10 @@
         return p.sendRequest(url, "GET", null, successMessage, async);
     }
 
+    p.deleteJson = function (url, successMessage, async) {
+        return p.sendRequest(url, "DELETE", null, successMessage, async);
+    }
+
 
     // =========================================================================
     // DEFINE NAMESPACE

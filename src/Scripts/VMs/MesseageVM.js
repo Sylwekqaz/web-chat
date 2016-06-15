@@ -25,4 +25,10 @@
 
         return user;
     });
+
+    self.TooltipMessege = ko.pureComputed(function () {
+        
+
+        return self.User().Name() + " " + self.Date().fromNow();
+    });
 }

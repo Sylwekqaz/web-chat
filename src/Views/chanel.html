@@ -3,7 +3,7 @@
 <div class="message-group" data-bind="css:{own:IsOwnMessege,other:!IsOwnMessege()}">
     <div class="message-outer">
         <div class="avatar-section">
-            <img class="img-circle" data-bind="attr:{src:User().AvatarUri}"/>
+            <img class="img-circle" data-bind="attr:{src:User().AvatarUri},tooltip: { title: TooltipMessege, trigger: 'hover' }">
         </div>
         <div class="message-inner">
             <div class="message" data-bind="text: Message"></div>

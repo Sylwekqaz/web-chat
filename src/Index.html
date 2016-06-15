@@ -47,8 +47,23 @@
         }
 
         Promise.all($('script[type="text/html"][src]').map(function() { return LoadScriptInline(this); }).get())
+            .then(InitializeIonSound)
             .then(InitializeKO)
             .catch(function(element) { console.error("Problem with loading template", element); });
+
+        function InitializeIonSound() {
+            ion.sound({
+                sounds: [
+                    {
+                        name: "new-messege"
+                    }
+                ],
+                volume: 1,
+                path: "Sounds/",
+                preload: true,
+                multiplay:true,
+            });
+        }
     </script>
 </div>
 </body>

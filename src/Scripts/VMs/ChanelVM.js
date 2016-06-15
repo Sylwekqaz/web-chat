@@ -9,9 +9,19 @@
     self.Messeges = ko.observableArray([]);
     self.MessageToAdd = ko.observable("");
     self.AllRead = ko.observable(true);
+    self.IsFriendChanel = ko.observable(false);
+    self.IsGroupChanel = ko.observable(false);
 
     //computed
     self.AvatarUri = ko.observable("Content/Images/sample.jpg"); //todo add gravatar
+
+    self.CanAddCurrentChanelToGroupChanel = ko.pureComputed(function() {
+        var selectedChanel = root.SelectedChanel();
+        var can = selectedChanel != null && selectedChanel.IsGroupChanel();
+        can = can && self.IsFriendChanel();
+        // check if curren user is member of selected chanel
+        return can;
+    });
 
     //function
     self.GetNewMesseges = function() {

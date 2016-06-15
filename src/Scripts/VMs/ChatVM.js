@@ -220,6 +220,29 @@
             });
     }
 
+    self.RemoveFriend = function(friend) {
+        bootbox.confirm("Czy jesteś pewny, twoja decyzja może mieć negatywny wpływ na twoje życie towarzyskie",
+            function(result) {
+                if (result) {
+                    Chat.deleteJson("/friends/delete/" + friend.Id())
+                        .done(function() {
+                            self.Friends.remove(friend);
+                        });
+                }
+            });
+    }
+
+    self.AddFriendToGroup = function(friend) {
+        Chat.postJson("/groups/invite",
+            {
+                "groupId": self.SelectedChanelId(),
+                "userIds": [friend.Id()]
+            })
+            .done(function() {
+                self.FetchGroups();
+            });
+    }
+
 
     //computed
     self.SelectedChanel = ko.computed(function() {

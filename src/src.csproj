@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\App.js" />
+    <Content Include="Scripts\bindings\tooltip-bindings.js" />
     <Content Include="Scripts\bindings\enter-bindings.js" />
     <Content Include="Scripts\bindings\Validation\knockout.validation.js" />
     <Content Include="Scripts\bindings\Validation\pl-PL.js" />

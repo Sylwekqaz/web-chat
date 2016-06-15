@@ -60,9 +60,9 @@
                 "message": self.MessageToAdd()
             })
             .done(function() {
-                self.MessageToAdd("");
                 self.GetNewMesseges();
             });
+        self.MessageToAdd("");
 
     }
 

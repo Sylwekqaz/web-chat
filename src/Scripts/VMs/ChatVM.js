@@ -20,6 +20,13 @@
         return user;
     }
 
+    self.ScrolledChanel = function (data,event) {
+        var elem = event.target;
+        if (elem.scrollTop < 200) {
+            self.SelectedChanel().GetHistory(data,event);
+        }
+    }
+
     self.GetChanelById = function(id) {
         var chanel = ko.utils.arrayFirst(self.Friends(),
             function(c) {

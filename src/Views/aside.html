@@ -1,0 +1,39 @@
+﻿<div class="top">
+    <div class="avatar">
+        <img data-bind="attr: { src: CurrentUser().AvatarUri }" />
+        <div class="green-dot"></div>
+    </div>
+
+    <div class="user-detail">
+        <p class="loggedusername"><strong data-bind="text: CurrentUser().Name"></strong></p>
+        <p class="user-email" data-bind="text: CurrentUser().Email"></p>
+    </div>
+    <a class="top-buttons" data-bind="click: CurrentUser().Logout"><span class="glyphicon glyphicon-off"></span></a>
+</div>
+
+<div class="chanels">
+
+    <!-- ko template:{ name: 'chanel-list-template', data: {Name:'Kontakty',Chanels:Friends} } --> <!--/ko-->
+    <!-- ko template:{ name: 'chanel-list-template', data: {Name:'Grupy',Chanels:Groups} } --> <!--/ko-->
+
+
+    <div class="fab-menu">
+        <ul>
+            <li>
+                <a data-bind="click: $root.ShowAddFriendModal" class="fab fab-sm fab-success">
+                    <i class="fa fa-user-plus"></i>
+                </a>
+            </li>
+            <li>
+                <a data-bind="click: $root.ShowAddGroupModal" class="fab fab-sm fab-info">
+                    <i class="fa fa-users"></i>
+                </a>
+            </li>
+        </ul>
+        <a data-bind="click: $root.clickedAdd" class="fab fab-secondary">
+            <i class="fa fa-plus"></i>
+        </a>
+    </div>
+
+
+</div>

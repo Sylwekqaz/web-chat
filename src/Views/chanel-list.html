@@ -1,3 +1,30 @@
-﻿<!-- ko foreach:Chanels-->
-<div data-bind="text: Name,click:$parent.ChangeChanel"></div>
-<!-- /ko-->
+﻿
+<div class="chanel-list">
+    <div class="chanel-list-header" data-bind="text:Name"></div>
+
+    <div class="chanel-list-body" data-bind="foreach: Chanels">
+        <div class="chanel" data-bind="click: $root.ChangeChanel, css: { selected: Id() == $root.SelectedChanelId(), offline: IsOffline, unread:!AllRead() }">
+            <div class="avatar">
+                <img data-bind="attr: { src: AvatarUri }" />
+                <div class="green-dot"></div>
+            </div>
+            <p class="name">
+                <strong data-bind="text: Name"></strong>
+            </p>
+            <span class="action-button unread-icon glyphicon glyphicon-comment"></span>
+            <div class="action-button">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li data-bind="if:IsGroupChanel"><a data-bind="click:Rename">Zmień nazwę</a></li>
+                        <li data-bind="if:CanAddCurrentChanelToGroupChanel"><a data-bind="click:$root.AddFriendToGroup">Dodaj znajomego do grupy</a></li>
+                        <li data-bind="if:IsFriendChanel"><a data-bind="click:$root.RemoveFriend">Usuń ze znajomych</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

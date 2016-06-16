@@ -1,3 +1,17 @@
-﻿<!-- ko foreach:Messeges-->
-<div data-bind="text: Content"></div>
+﻿<!-- ko if:Messeges-->
+<!-- ko foreach:Messeges-->
+<div class="message-group" data-bind="css:{own:IsOwnMessege,other:!IsOwnMessege()}">
+    <div class="message-outer">
+        <div class="avatar-section">
+            <img class="img-circle" data-bind="attr:{src:User().AvatarUri},tooltip: { title: TooltipMessege, trigger: 'hover' }">
+        </div>
+        <div class="message-inner">
+            <div class="message" data-bind="text: Message"></div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko ifnot:Messeges-->
+<h2>Brak wiadomości</h2>
 <!-- /ko -->

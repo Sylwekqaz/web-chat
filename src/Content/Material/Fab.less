@@ -1,0 +1,95 @@
+﻿@import (reference) "../bootstrap/mixins/buttons.less";
+
+//fab
+.fab {
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.38);
+    }
+
+    display: inline-block;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+    transition: all 0.15s ease-out 0s;
+    .fab-size(55px);
+    .fab-variant(@btn-default-color,@btn-default-bg);
+}
+
+.fab-size(@size) {
+    width: @size;
+    height: @size;
+    line-height: @size; // must be equal to height to vertical align
+    font-size: 0.43 * @size;
+    transition: all 0.15s ease-out 0s;
+}
+
+.fab-variant(@textColor,@bgColor) {
+    .button-variant(@textColor,@bgColor,transparent);
+}
+
+//fab variants
+.fab-primary {
+    .fab-variant(@btn-primary-color,@btn-primary-bg);
+}
+
+.fab-secondary {
+    .fab-variant(@btn-secondary-color,@btn-secondary-bg);
+}
+
+.fab-success {
+    .fab-variant(@btn-success-color,@btn-success-bg);
+}
+
+.fab-info {
+    .fab-variant(@btn-info-color,@btn-info-bg);
+}
+
+.fab-warning {
+    .fab-variant(@btn-warning-color,@btn-warning-bg);
+}
+
+.fab-danger {
+    .fab-variant(@btn-danger-color,@btn-danger-bg);
+}
+//fab sizes
+.fab-sm {
+    .fab-size(35px);
+}
+
+//fab menu
+
+.fab-menu {
+    ul {
+        text-align: center;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+        }
+    }
+    //hide elements and show on hover
+    &:hover {
+        ul {
+            opacity: 1;
+            max-height: 9999px;
+            margin-bottom: 5px;
+
+            li {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    ul {
+        max-height: 0;
+        opacity: 0;
+        transition: all 0.15s ease-out 0s;
+        margin-bottom: 0;
+
+        li {
+            transition: all 0.15s ease-out 0s;
+        }
+    }
+}

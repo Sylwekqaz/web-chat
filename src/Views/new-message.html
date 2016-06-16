@@ -1,4 +1,14 @@
-﻿<form data-bind="submit: sendMessage" id="chat-message">
-    <input data-bind="value: messageToAdd, valueUpdate: 'afterkeydown', enterkey:sendMessage" id="message" type="text" autocomplete="off">
-    <button type="button" data-bind="click:sendMessage">Submit</button>
+﻿<form data-bind="submit: Send" id="chat-message">
+            <textarea data-bind="value: MessageToAdd, valueUpdate: 'afterkeydown', enterkey:Send"
+                      type="text"
+                      id="message"
+                      class="form-control"
+                      autocomplete="off"
+                      placeholder="Enter message..."></textarea>
+
+            <!--<button class="btn btn-secondary" type="button">Emots</button>-->
+    <button class="btn btn-primary" type="button" data-bind="click:Send"><i class="fa fa-send fa-2x"></i></button>
+
+
+
 </form>

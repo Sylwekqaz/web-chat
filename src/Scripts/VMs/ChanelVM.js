@@ -39,6 +39,30 @@
             });
     }
 
+    self.PendingHistoryRequest = ko.observable(false);
+    self.GetHistory = function (data,event) {
+        if (!self.ConversationId()) {
+            return;
+        }
+        if (self.PendingHistoryRequest()) {
+            return;
+        }
+        self.PendingHistoryRequest(true);
+        var elem = event.target;
+        var oldScroll = elem.scrollHeight;
+        Chat.getJson("/messages/before/" + self.ConversationId()+"/"+self.Messeges()[0].Id())
+            .done(function(data) {
+                for (i of data) {
+                    var message = new MesseageVM(root, self, i);
+                    self.AddMessegeIfNotExist(message);
+                }
+                self.SortMesseges();
+                var scrollDiff = elem.scrollHeight - oldScroll;
+                elem.scrollTop += scrollDiff;
+                self.PendingHistoryRequest(false);
+            });
+    }
+
     self.AddMessegeIfNotExist = function(message) {
         var match = ko.utils.arrayFirst(self.Messeges(),
             function(item) {

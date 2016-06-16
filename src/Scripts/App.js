@@ -64,7 +64,7 @@
         if (xhr.status === 400) {
             for (var i = 0; i < callbacks.length; i++) {
                 var callback = callbacks[i];
-                var isHandled = callback($.parseJSON(xhr.responseText).error);
+                var isHandled = callback($.parseJSON(xhr.responseText));
                 if (isHandled) {
                     return true;
                 }
@@ -75,7 +75,7 @@
 
     p.handleTimeout = function(textStatus) {
         if (textStatus === "timeout") {
-            alert('Przekroczono czas oczekiwania. Spróbuj wykonać operację ponownie.');
+            //alert('Przekroczono czas oczekiwania. Spróbuj wykonać operację ponownie.');
             //toastr.error('Przekroczono czas oczekiwania. Spróbuj wykonać operację ponownie.'); todo
             return true;
         }
@@ -128,7 +128,7 @@
                     p.handleApiErrors(xhr, apiErrorsCallbacks);
                 if (!isHandled) {
                     //toastr.error("Nieoczekiwany błąd. Odśwież stronę i spróbuj ponownie."); todo
-                    alert("Nieoczekiwany błąd. Odśwież stronę i spróbuj ponownie.");
+                    //alert("Nieoczekiwany błąd. Odśwież stronę i spróbuj ponownie.");
                 }
 
             })

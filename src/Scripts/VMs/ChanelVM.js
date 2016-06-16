@@ -24,7 +24,7 @@
     });
 
     //function
-    self.GetNewMesseges = function() {
+    self.GetNewMesseges = function () {
         if (!self.ConversationId()) {
             return;
         }

@@ -83,7 +83,12 @@
             });
     }
 
-    self.ChangeChanel = function(chanel) {
+    self.ChangeChanel = function (chanel,event) {
+        if (event) {
+            if (event.target.classList.contains("glyphicon")) {
+                return;
+            }
+        }
         self.SelectedChanelId(chanel.Id());
         self.SelectedChanel().GetNewMesseges();
         self.SelectedChanel().AllRead(true);
@@ -212,6 +217,29 @@
         Chat.postJson("/friends/add/" + id)
             .done(function() {
                 self.FetchFriends();
+            });
+    }
+
+    self.RemoveFriend = function(friend) {
+        bootbox.confirm("Czy jesteś pewny, twoja decyzja może mieć negatywny wpływ na twoje życie towarzyskie",
+            function(result) {
+                if (result) {
+                    Chat.deleteJson("/friends/delete/" + friend.Id())
+                        .done(function() {
+                            self.Friends.remove(friend);
+                        });
+                }
+            });
+    }
+
+    self.AddFriendToGroup = function(friend) {
+        Chat.postJson("/groups/invite",
+            {
+                "groupId": self.SelectedChanelId(),
+                "userIds": [friend.Id()]
+            })
+            .done(function() {
+                self.FetchGroups();
             });
     }
 

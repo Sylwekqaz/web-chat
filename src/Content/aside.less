@@ -31,7 +31,6 @@
         flex-grow: 0;
         flex-shrink: 0;
         background-color: @primaryColor;
-        z-index: 945;
         display: flex;
         align-items: center;
         padding: @standard-margin;
@@ -46,7 +45,7 @@
 
         .user-detail {
             flex-grow: 1;
-            overflow:hidden;
+            overflow: hidden;
             white-space: nowrap;
             color: @textPrimaryColor;
             align-self: flex-end;
@@ -109,7 +108,6 @@
                 color: @primaryTextColor;
                 background-color: @textPrimaryColor;
                 font-weight: bold;
-                display: flex;
                 flex-direction: column;
                 justify-content: center;
                 line-height: @small-avatar-size;
@@ -137,7 +135,10 @@
                     }
 
                     &.offline {
-                        filter: grayscale(100%);
+                        .avatar {
+                            filter: grayscale(100%);
+                        }
+
                         color: @dividerColor;
 
                         .green-dot {
@@ -161,7 +162,7 @@
 
                     .name {
                         flex-grow: 1;
-                        overflow:hidden;
+                        overflow: hidden;
                         white-space: nowrap;
                         margin-top: @standard-margin * 1.1;
                     }
